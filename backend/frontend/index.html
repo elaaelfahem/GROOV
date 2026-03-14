@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Study Group — Virtual Study Room</title>
+    <meta name="description" content="An AI-powered virtual study room with multiple AI personas that simulate a real collaborative study session.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="app">
+        <!-- ── Header ──────────────────────────────────────── -->
+        <header class="header">
+            <div class="header-left">
+                <div class="logo">
+                    <span class="logo-icon">🧠</span>
+                    <span class="logo-text">Study Group</span>
+                </div>
+            </div>
+            <div class="header-center">
+                <input type="text" id="topicInput" class="topic-input" placeholder="Enter study topic..." value="Photosynthesis">
+                <select id="modeSelect" class="mode-select">
+                    <option value="teaching">📖 Teaching</option>
+                    <option value="exam_prep">📝 Exam Prep</option>
+                    <option value="deep_understanding">🔬 Deep Understanding</option>
+                    <option value="quick_review">⚡ Quick Review</option>
+                </select>
+            </div>
+            <div class="header-right">
+                <button id="voiceToggle" class="voice-toggle active" title="Toggle AI voices">
+                    <span class="voice-icon">🔊</span>
+                </button>
+                <div class="pomodoro" id="pomodoro">
+                    <div class="pomodoro-ring">
+                        <svg viewBox="0 0 36 36">
+                            <path class="pomodoro-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                            <path class="pomodoro-fill" id="pomodoroFill" stroke-dasharray="100, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                        </svg>
+                        <span class="pomodoro-time" id="pomodoroTime">25:00</span>
+                    </div>
+                    <button class="pomodoro-btn" id="pomodoroBtn" title="Start Pomodoro">▶</button>
+                </div>
+            </div>
+        </header>
+
+        <!-- ── Main Content: FaceTime Style ── -->
+        <main class="main facetime-layout">
+            
+            <!-- Video Grid Area -->
+            <section class="video-grid-container">
+                <div class="video-grid" id="videoGrid">
+                    <!-- Participant: The Genius (Main Spotlight) -->
+                    <div class="video-cell spotlight" id="cell-genius" data-persona="genius">
+                        <div class="video-placeholder">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800" alt="Genius">
+                        </div>
+                        <video id="video-genius" class="did-video hidden" autoplay playsinline></video>
+                        <div class="participant-label">
+                            <span class="status-dot"></span>
+                            The Genius
+                        </div>
+                        <div class="typing-pill">🧠 Thinking...</div>
+                    </div>
+
+                    <!-- Participant: The Confused -->
+                    <div class="video-cell" id="cell-confused" data-persona="confused">
+                        <div class="video-placeholder">
+                            <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=600" alt="Confused">
+                        </div>
+                        <video id="video-confused" class="did-video hidden" autoplay playsinline></video>
+                        <div class="participant-label">
+                            <span class="status-dot"></span>
+                            The Confused
+                        </div>
+                        <div class="typing-pill">🤔 Thinking...</div>
+                    </div>
+
+                    <!-- Participant: The Skeptic -->
+                    <div class="video-cell" id="cell-skeptic" data-persona="skeptic">
+                        <div class="video-placeholder">
+                            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=600" alt="Skeptic">
+                        </div>
+                        <video id="video-skeptic" class="did-video hidden" autoplay playsinline></video>
+                        <div class="participant-label">
+                            <span class="status-dot"></span>
+                            The Skeptic
+                        </div>
+                        <div class="typing-pill">🔍 Analyzing...</div>
+                    </div>
+
+                    <!-- Participant: The Summarizer -->
+                    <div class="video-cell" id="cell-summarizer" data-persona="summarizer">
+                        <div class="video-placeholder">
+                            <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=600" alt="Summarizer">
+                        </div>
+                        <video id="video-summarizer" class="did-video hidden" autoplay playsinline></video>
+                        <div class="participant-label">
+                            <span class="status-dot"></span>
+                            The Summarizer
+                        </div>
+                    </div>
+
+                    <!-- Participant: The Quiz Master -->
+                    <div class="video-cell" id="cell-quiz_master" data-persona="quiz_master">
+                        <div class="video-placeholder">
+                            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=600" alt="Quiz Master">
+                        </div>
+                        <video id="video-quiz_master" class="did-video hidden" autoplay playsinline></video>
+                        <div class="participant-label">
+                            <span class="status-dot"></span>
+                            Quiz Master
+                        </div>
+                    </div>
+
+                    <!-- Participant: The Organizer -->
+                    <div class="video-cell" id="cell-organizer" data-persona="organizer">
+                        <div class="video-placeholder">
+                            <img src="https://images.unsplash.com/photo-1554151228-14d9def656e4?w=600" alt="Organizer">
+                        </div>
+                        <video id="video-organizer" class="did-video hidden" autoplay playsinline></video>
+                        <div class="participant-label">
+                            <span class="status-dot"></span>
+                            The Organizer
+                        </div>
+                    </div>
+
+                    <!-- Side Self Mirror -->
+                    <div class="video-cell self-view">
+                        <div class="video-placeholder user-placeholder">👤</div>
+                        <video id="userVideo" autoplay muted playsinline></video>
+                        <div class="participant-label">You (Student)</div>
+                    </div>
+                </div>
+
+                <!-- Floating Controls Overlay -->
+                <div class="facetime-controls">
+                    <button id="micBtn" class="control-btn mic-btn" title="Speak">🎙️</button>
+                    <button id="toggleChatBtn" class="control-btn toggle-chat-btn" title="Toggle Chat">💬</button>
+                    <button class="control-btn end-call-btn" title="End Session">🛑</button>
+                </div>
+            </section>
+
+            <!-- Side Panel: Chat & Info -->
+            <aside class="chat-panel" id="chatPanel">
+                <div class="chat-header">
+                    <h3>Group Chat</h3>
+                </div>
+                <div class="messages" id="messages">
+                    <div class="welcome-message">
+                        <p>Welcome to the group session!</p>
+                    </div>
+                </div>
+                <div class="chat-input-area">
+                    <input type="text" id="userInput" placeholder="Type a message..." autocomplete="off">
+                    <button id="sendBtn" class="send-btn">Send</button>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <!-- Loading overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-dots">
+            <span></span><span></span><span></span>
+        </div>
+        <p class="loading-text" id="loadingText">Study group is thinking...</p>
+    </div>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>
