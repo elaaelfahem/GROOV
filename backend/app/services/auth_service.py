@@ -7,6 +7,8 @@ Database file: backend/data/users.db
 
 import os
 import sqlite3
+import hashlib
+import base64
 import logging
 from datetime import datetime, timedelta
 from passlib.context import CryptContext
@@ -20,7 +22,7 @@ ALGORITHM = "HS256"
 TOKEN_EXPIRE_HOURS = 72
 
 # ── Password hashing ──
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto", bcrypt__truncate_error=False)
 
 # ── Database path ──
 DB_DIR = os.path.join(os.path.dirname(__file__), "..", "..", "data")
@@ -89,6 +91,13 @@ def register_user(username: str, email: str, password: str) -> dict:
         raise ValueError("All fields are required")
     if len(password) < 6:
         raise ValueError("Password must be at least 6 characters")
+    
+    
+    # Bcrypt silently truncates at 72 bytes, which degrades security for long passwords.
+    # The industry standard fix is to pre-hash the password with SHA-256.
+    # This guarantees the password is a secure, fixed-length (44-byte) Base64 string.
+    password_hash_input = base64.b64encode(hashlib.sha256(password.encode('utf-8')).digest()).decode('utf-8')
+
     if "@" not in email:
         raise ValueError("Invalid email address")
 
@@ -99,7 +108,7 @@ def register_user(username: str, email: str, password: str) -> dict:
         if existing:
             raise ValueError("An account with this email already exists")
 
-        password_hash = pwd_context.hash(password)
+        password_hash = pwd_context.hash(password_hash_input)
         cursor = conn.execute(
             "INSERT INTO users (username, email, password_hash) VALUES (?, ?, ?)",
             (username, email, password_hash),
@@ -131,7 +140,10 @@ def login_user(email: str, password: str) -> dict:
         if not user:
             raise ValueError("Invalid email or password")
 
-        if not pwd_context.verify(password, user["password_hash"]):
+        # Pre-hash to match registration logic
+        password_hash_input = base64.b64encode(hashlib.sha256(password.encode('utf-8')).digest()).decode('utf-8')
+
+        if not pwd_context.verify(password_hash_input, user["password_hash"]):
             raise ValueError("Invalid email or password")
 
         # Generate JWT

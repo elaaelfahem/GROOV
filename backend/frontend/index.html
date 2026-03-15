@@ -28,14 +28,23 @@
                     <option value="deep_understanding">🔬 Deep Understanding</option>
                     <option value="quick_review">⚡ Quick Review</option>
                 </select>
-                <!-- PDF Upload -->
-                <label class="upload-btn" title="Upload lecture notes (PDF/TXT)">
-                    📄
-                    <input type="file" id="fileInput" accept=".pdf,.txt" style="display:none">
-                </label>
-                <span id="fileStatus" class="file-status"></span>
             </div>
             <div class="header-right">
+                <!-- Stats bar -->
+                <div class="stats-bar" id="statsBar">
+                    <div class="stat-pill" title="Mastery level">
+                        <span class="stat-icon">🧠</span>
+                        <span class="stat-val" id="statMastery">0%</span>
+                    </div>
+                    <div class="stat-pill" title="Quiz score">
+                        <span class="stat-icon">🎯</span>
+                        <span class="stat-val" id="statScore">0/0</span>
+                    </div>
+                    <div class="stat-pill" title="Focus streak">
+                        <span class="stat-icon">🔥</span>
+                        <span class="stat-val" id="statStreak">0</span>
+                    </div>
+                </div>
                 <button onclick="logout()" class="theme-toggle" title="Log out" style="color:#ef4444;">
                     <span>🚪</span>
                 </button>

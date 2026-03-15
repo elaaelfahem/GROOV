@@ -23,6 +23,10 @@
 function logout() {
     localStorage.removeItem('sg_token');
     localStorage.removeItem('sg_user');
+    localStorage.removeItem('sg_session_id');
+    localStorage.removeItem('sg_topic');
+    localStorage.removeItem('sg_mode');
+    localStorage.removeItem('sg_has_pdf');
     window.location.href = '/auth.html';
 }
 
@@ -76,7 +80,7 @@ const REACTION_WEIGHTS = {
 // ═══════════════════════════════════════════════════════════════
 
 const state = {
-    sessionId: `session_${Math.random().toString(36).substr(2, 9)}`,
+    sessionId: localStorage.getItem('sg_session_id') || `session_${Math.random().toString(36).substr(2, 9)}`,
     isVoiceEnabled: true,
     isThinking: false,
     isListening: false,
@@ -89,7 +93,7 @@ const state = {
     waitingForFeynman: false,
     mastery: 0,
     questionsAnswered: 0,
-    pdfContext: null,
+    pdfContext: localStorage.getItem('sg_has_pdf') === 'true',
     streak: 0,
 };
 
@@ -671,6 +675,9 @@ async function sendMessage() {
         // Process persona responses with full room interactions
         await processResponses(data.responses);
 
+        // Update stats bar
+        updateStats();
+
         // ── Struggle Detection — auto-switch mode ──
         if (data.suggested_mode) {
             if (data.suggested_mode === 'deep_understanding' && el.modeSelect.value !== 'deep_understanding') {
@@ -713,6 +720,29 @@ function updateEmotionBadge(data) {
     } else {
         badge.textContent = `${emoji} neutral`;
         badge.classList.add('neutral', 'visible');
+    }
+}
+
+// ── Stats Bar Updates ──
+function updateStats() {
+    const masteryEl = document.getElementById('statMastery');
+    const scoreEl = document.getElementById('statScore');
+    const streakEl = document.getElementById('statStreak');
+
+    if (masteryEl) {
+        masteryEl.textContent = `${state.mastery}%`;
+        masteryEl.classList.add('updated');
+        setTimeout(() => masteryEl.classList.remove('updated'), 500);
+    }
+    if (scoreEl) {
+        scoreEl.textContent = `${state.questionsAnswered}`;
+        scoreEl.classList.add('updated');
+        setTimeout(() => scoreEl.classList.remove('updated'), 500);
+    }
+    if (streakEl) {
+        streakEl.textContent = `${state.streak}`;
+        streakEl.classList.add('updated');
+        setTimeout(() => streakEl.classList.remove('updated'), 500);
     }
 }
 
@@ -1291,6 +1321,31 @@ document.addEventListener('DOMContentLoaded', () => {
     // Give the main init a moment to run, then patch
     setTimeout(() => {
         patchSendMessage();
+
+        // Apply lobby settings (topic + mode from the upload page)
+        const lobbyTopic = localStorage.getItem('sg_topic');
+        const lobbyMode = localStorage.getItem('sg_mode');
+        if (lobbyTopic && el.topicInput) {
+            el.topicInput.value = lobbyTopic;
+            if (el.tableTopic) el.tableTopic.textContent = lobbyTopic;
+        }
+        if (lobbyMode && el.modeSelect) {
+            el.modeSelect.value = lobbyMode;
+        }
+
+        // Show PDF status if uploaded in lobby
+        if (localStorage.getItem('sg_has_pdf') === 'true') {
+            addSystemMessage('📄 Your lecture notes are indexed and ready — the AI agents can reference them!');
+        }
+
+        // Auto-start pomodoro timer
+        if (!state.pomodoro.isActive) {
+            togglePomodoro();
+        }
+
+        // Initialize stats display
+        updateStats();
+
         loadPreviousSession();
     }, 100);
 });

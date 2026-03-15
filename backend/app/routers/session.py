@@ -117,7 +117,7 @@ async def session_respond(payload: SessionRespondRequest, authorization: str = H
     
     session["history"].append({"role": "user", "content": payload.user_message})
     for r in replies:
-        session["history"].append({"speaker": r["persona"], "content": r["message"]})
+        session["history"].append({"speaker": r.get("speaker", r.get("persona", "")), "content": r.get("text", r.get("message", ""))})
 
     logger.info(
         f"Pipeline finished — {len(replies)} replies, "

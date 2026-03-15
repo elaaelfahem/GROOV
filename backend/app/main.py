@@ -68,3 +68,7 @@ if FRONTEND_DIR.exists():
     @app.get("/auth.html")
     async def serve_auth():
         return FileResponse(str(FRONTEND_DIR / "auth.html"))
+
+    @app.get("/lobby.html")
+    async def serve_lobby():
+        return FileResponse(str(FRONTEND_DIR / "lobby.html"))

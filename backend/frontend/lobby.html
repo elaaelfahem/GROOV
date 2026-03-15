@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Groov — Prepare Your Study Session</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #050510;
+            color: #eeeef5;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        /* Ambient background glow */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 40%; left: 30%;
+            width: 900px; height: 900px;
+            transform: translate(-50%, -50%);
+            background: radial-gradient(circle, rgba(91,141,239,0.06) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        body::after {
+            content: '';
+            position: fixed;
+            top: 60%; left: 70%;
+            width: 700px; height: 700px;
+            transform: translate(-50%, -50%);
+            background: radial-gradient(circle, rgba(124,91,245,0.05) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .lobby-container {
+            width: 100%;
+            max-width: 560px;
+            padding: 24px;
+        }
+
+        /* Brand */
+        .brand {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+        .brand-icon {
+            font-size: 3rem;
+            display: block;
+            margin-bottom: 12px;
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+        .brand h1 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #5b8def, #7c5bf5);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .brand p {
+            color: #7b7b95;
+            font-size: 0.85rem;
+            margin-top: 6px;
+        }
+
+        /* Card */
+        .lobby-card {
+            background: rgba(18, 18, 32, 0.65);
+            border: 1px solid rgba(255,255,255,0.07);
+            border-radius: 20px;
+            padding: 36px 28px;
+            backdrop-filter: blur(24px);
+        }
+
+        /* Step indicator */
+        .steps {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 28px;
+        }
+        .step-dot {
+            width: 8px; height: 8px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            transition: all 0.4s ease;
+        }
+        .step-dot.active {
+            background: #5b8def;
+            box-shadow: 0 0 10px rgba(91,141,239,0.5);
+            width: 24px;
+            border-radius: 4px;
+        }
+        .step-dot.done {
+            background: #22c55e;
+        }
+
+        /* ── Upload Zone ── */
+        .upload-zone {
+            border: 2px dashed rgba(91,141,239,0.25);
+            border-radius: 16px;
+            padding: 40px 24px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            margin-bottom: 24px;
+            position: relative;
+            overflow: hidden;
+        }
+        .upload-zone:hover,
+        .upload-zone.dragover {
+            border-color: #5b8def;
+            background: rgba(91,141,239,0.05);
+            transform: translateY(-2px);
+        }
+
+        .upload-zone .upload-icon {
+            font-size: 3rem;
+            display: block;
+            margin-bottom: 12px;
+            transition: transform 0.3s;
+        }
+        .upload-zone:hover .upload-icon {
+            transform: scale(1.1);
+        }
+        .upload-zone h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+        .upload-zone p {
+            font-size: 0.8rem;
+            color: #7b7b95;
+        }
+        .upload-zone input[type="file"] {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        /* ── Indexing Progress ── */
+        .indexing-panel {
+            display: none;
+            text-align: center;
+            padding: 20px 0;
+            margin-bottom: 24px;
+        }
+        .indexing-panel.active { display: block; }
+
+        .indexing-filename {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #5b8def;
+            margin-bottom: 16px;
+        }
+
+        .progress-track {
+            width: 100%;
+            height: 6px;
+            background: rgba(255,255,255,0.06);
+            border-radius: 3px;
+            overflow: hidden;
+            margin-bottom: 12px;
+        }
+        .progress-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #5b8def, #7c5bf5);
+            border-radius: 3px;
+            transition: width 0.4s ease;
+            animation: shimmer 1.5s ease infinite;
+        }
+        @keyframes shimmer {
+            0% { opacity: 0.7; }
+            50% { opacity: 1; }
+            100% { opacity: 0.7; }
+        }
+
+        .indexing-status {
+            font-size: 0.75rem;
+            color: #7b7b95;
+        }
+
+        /* Uploaded check */
+        .uploaded-badge {
+            display: none;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px;
+            background: rgba(34,197,94,0.08);
+            border: 1px solid rgba(34,197,94,0.2);
+            border-radius: 12px;
+            margin-bottom: 24px;
+            font-size: 0.85rem;
+            color: #22c55e;
+            font-weight: 600;
+        }
+        .uploaded-badge.active { display: flex; }
+
+        /* ── Settings (Topic + Mode) ── */
+        .settings-section {
+            margin-bottom: 24px;
+        }
+        .settings-section label {
+            display: block;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #7b7b95;
+            margin-bottom: 8px;
+        }
+        .settings-section input,
+        .settings-section select {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid rgba(255,255,255,0.07);
+            border-radius: 12px;
+            background: rgba(255,255,255,0.04);
+            color: #eeeef5;
+            font-family: inherit;
+            font-size: 0.9rem;
+            outline: none;
+            transition: border 0.3s ease, box-shadow 0.3s ease;
+            appearance: none;
+            -webkit-appearance: none;
+            margin-bottom: 16px;
+        }
+        .settings-section input:focus,
+        .settings-section select:focus {
+            border-color: #5b8def;
+            box-shadow: 0 0 0 3px rgba(91,141,239,0.15);
+        }
+        .settings-section input::placeholder {
+            color: #4a4a60;
+        }
+        .settings-section select option {
+            background: #12121f;
+            color: #eeeef5;
+        }
+
+        /* ── Enter Button ── */
+        .enter-btn {
+            width: 100%;
+            padding: 16px;
+            border: none;
+            border-radius: 14px;
+            background: linear-gradient(135deg, #5b8def, #7c5bf5);
+            color: #fff;
+            font-family: inherit;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            letter-spacing: 0.5px;
+        }
+        .enter-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(91,141,239,0.35);
+        }
+        .enter-btn:active {
+            transform: translateY(0);
+        }
+        .enter-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Skip link */
+        .skip-link {
+            display: block;
+            text-align: center;
+            margin-top: 16px;
+            color: #4a4a60;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: color 0.3s;
+            text-decoration: none;
+        }
+        .skip-link:hover {
+            color: #7b7b95;
+        }
+
+        /* Footer */
+        .lobby-footer {
+            text-align: center;
+            margin-top: 20px;
+            color: #4a4a60;
+            font-size: 0.75rem;
+        }
+
+        /* Welcome banner */
+        .welcome-banner {
+            text-align: center;
+            margin-bottom: 24px;
+            padding: 12px;
+            background: rgba(91,141,239,0.06);
+            border-radius: 12px;
+            border: 1px solid rgba(91,141,239,0.1);
+        }
+        .welcome-banner span {
+            font-size: 0.85rem;
+            color: #94a3b8;
+        }
+        .welcome-banner strong {
+            color: #5b8def;
+        }
+    </style>
+</head>
+<body>
+    <div class="lobby-container">
+        <!-- Brand -->
+        <div class="brand">
+            <span class="brand-icon">📚</span>
+            <h1>Prepare Your Session</h1>
+            <p>Upload your notes, set your topic, and jump in</p>
+        </div>
+
+        <!-- Welcome -->
+        <div class="welcome-banner" id="welcomeBanner">
+            <span>Welcome back, <strong id="userName">Student</strong>!</span>
+        </div>
+
+        <!-- Card -->
+        <div class="lobby-card">
+            <!-- Step dots -->
+            <div class="steps">
+                <div class="step-dot active" id="step1"></div>
+                <div class="step-dot" id="step2"></div>
+                <div class="step-dot" id="step3"></div>
+            </div>
+
+            <!-- Upload Zone -->
+            <div class="upload-zone" id="uploadZone">
+                <span class="upload-icon">📄</span>
+                <h3>Drop your lecture notes here</h3>
+                <p>PDF or TXT · Max 20MB</p>
+                <input type="file" id="fileInput" accept=".pdf,.txt">
+            </div>
+
+            <!-- Indexing Progress -->
+            <div class="indexing-panel" id="indexingPanel">
+                <div class="indexing-filename" id="indexFilename">Processing document...</div>
+                <div class="progress-track">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <div class="indexing-status" id="indexStatus">Extracting text and building AI embeddings...</div>
+            </div>
+
+            <!-- Uploaded badge -->
+            <div class="uploaded-badge" id="uploadedBadge">
+                ✅ <span id="uploadedName">Document indexed and ready!</span>
+            </div>
+
+            <!-- Settings -->
+            <div class="settings-section">
+                <label>Study Topic</label>
+                <input type="text" id="lobbyTopic" placeholder="e.g. Photosynthesis, UML Diagrams, Linear Algebra...">
+
+                <label>Study Mode</label>
+                <select id="lobbyMode">
+                    <option value="teaching">📖 Teaching — explanations & examples</option>
+                    <option value="exam_prep">📝 Exam Prep — practice questions</option>
+                    <option value="deep_understanding">🔬 Deep Understanding — thorough analysis</option>
+                    <option value="quick_review">⚡ Quick Review — fast recap</option>
+                </select>
+            </div>
+
+            <!-- Enter Button -->
+            <button class="enter-btn" id="enterBtn" onclick="enterStudyRoom()">
+                Enter Study Room →
+            </button>
+
+            <a class="skip-link" onclick="enterStudyRoom()">
+                or skip — study without notes
+            </a>
+        </div>
+
+        <div class="lobby-footer">Powered by Ollama · Local AI · Your data stays yours</div>
+    </div>
+
+    <script src="/static/lobby.js"></script>
+</body>
+</html>

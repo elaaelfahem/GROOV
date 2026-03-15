@@ -766,5 +766,173 @@
     "text": "Syntaxe des messages de retour : La syntaxe des messages de retour est : attributCible = nomOperation ( params ) : valeurRetour La syntaxe des paramètres est : nomParam = valeurParam Les messages de retour sont représentés en pointillés. 3- Activations et envois de messages: Utilisateur → Systeme : authentifier(login, mdp) resultat = authentifier() : true Panier → Article : getPrix() p = getPrix() : 10.5 Exemples :",
     "source": "Chapitre 4 - Diagramme de séquence.pdf",
     "page_number": 11
+  },
+  {
+    "chunk_id": "Chapitre 4 - Diagramme de séquence.pdf_p1_c0",
+    "text": "Chapitre IV: Représenté par : Mme Rhaiem Diagramme deséquence",
+    "source": "Chapitre 4 - Diagramme de séquence.pdf",
+    "page_number": 1
+  },
+  {
+    "chunk_id": "Chapitre 4 - Diagramme de séquence.pdf_p2_c0",
+    "text": "Description des cas d'utilisation 1- Introduction Les diagrammes de séquences permettent de décrire COMMENT les éléments du système interagissent entre eux et avec les acteurs. Les objets au cœur d'un système interagissent en s'échangeant des messages. Les acteurs interagissent avec le système au moyen d'IHM (Interfaces Homme-Machine). Les diagrammes de cas d'utilisation modélisent à QUOI sert le système, en organisant les interactions possibles avec les acteurs. Use Case = Qui ? + Fait quoi ? +",
+    "source": "Chapitre 4 - Diagramme de séquence.pdf",
+    "page_number": 2
+  },
+  {
+    "chunk_id": "Chapitre 4 - Diagramme de séquence.pdf_p2_c1",
+    "text": "avec les acteurs. Use Case = Qui ? + Fait quoi ? + Avec le système Les diagrammes de classes permettent de spécifier la structure et les liens entre les objets dont le système est composé Diagramme de classes = Classes + Attributs + Relations",
+    "source": "Chapitre 4 - Diagramme de séquence.pdf",
+    "page_number": 2
+  },
+  {
+    "chunk_id": "Chapitre 4 - Diagramme de séquence.pdf_p3_c0",
+    "text": "Formalisme : 2- Formalisme",
+    "source": "Chapitre 4 - Diagramme de séquence.pdf",
+    "page_number": 3
+  },
+  {
+    "chunk_id": "Chapitre 4 - Diagramme de séquence.pdf_p4_c0",
+    "text": "Sémantique : 3- Sémantique",
+    "source": "Chapitre 4 - Diagramme de séquence.pdf",
+    "page_number": 4
+  },
+  {
+    "chunk_id": "Chapitre 4 - Diagramme de séquence.pdf_p5_c0",
+    "text": "Exemple: 3- Sémantique",
+    "source": "Chapitre 4 - Diagramme de séquence.pdf",
+    "page_number": 5
+  },
+  {
+    "chunk_id": "Chapitre 4 - Diagramme de séquence.pdf_p6_c0",
+    "text": "Activations : 3- Activations et envois de messages: Une période d’activité correspond au temps pendant lequel un objet effectue une action. On distingue trois grandes catégories d’envois de message : 1- Flot de contrôle à plat : est utilisé pour indiquer la progression vers la prochaine étape d’une séquence → simple progression du scénario étapes qui s’enchaînent Dans un flot de contrôle à plat, l’objet n’attend pas que l’action précédente se termine. Messages :",
+    "source": "Chapitre 4 - Diagramme de séquence.pdf",
+    "page_number": 6
+  },
+  {
+    "chunk_id": "Chapitre 4 - Diagramme de séquence.pdf_p6_c1",
+    "text": "mine. Messages :",
+    "source": "Chapitre 4 - Diagramme de séquence.pdf",
+    "page_number": 6
+  },
+  {
+    "chunk_id": "Chapitre 4 - Diagramme de séquence.pdf_p7_c0",
+    "text": "3- Activations et envois de messages: Ici on a un appel de fonction dans une autre fonction. Un objet appelle un autre objet, puis il doit attendre que celui-ci termine. Messages : 2- Appel de procédure ou flot de contrôle emboîté : la séquence emboîtées doit se terminer pour que la séquence englobante reprenne le contrôle",
+    "source": "Chapitre 4 - Diagramme de séquence.pdf",
+    "page_number": 7
+  },
+  {
+    "chunk_id": "Chapitre 4 - Diagramme de séquence.pdf_p8_c0",
+    "text": "3- Activations et envois de messages: C’est le message de retour après l’exécution. Messages : 3- Retour d’un appel de procédure : le retour de message est explicite à la fin de l’exécution d’une sous-procédure et le retour éventuel de paramètres. Retour = fin de l’exécution + résultat",
+    "source": "Chapitre 4 - Diagramme de séquence.pdf",
+    "page_number": 8
+  },
+  {
+    "chunk_id": "Chapitre 4 - Diagramme de séquence.pdf_p9_c0",
+    "text": "Message synchrone et asynchrone: Message synchrone: Un message synchrone bloque l'expéditeur jusqu'à la réponse du destinataire. Le flot de contrôle passe de l'émetteur au récepteur : Si un objet A invoque une méthode d'un objet B, A reste bloqué tant que B n'a pas terminé. La représentation du message de retour est facultative, il est en fait inclus dans la fin d’exécution de l’opération déclenchée dans l’objet destinataire du message 3- Activations et envois de messages: Message asynchrone: Da",
+    "source": "Chapitre 4 - Diagramme de séquence.pdf",
+    "page_number": 9
+  },
+  {
+    "chunk_id": "Chapitre 4 - Diagramme de séquence.pdf_p9_c1",
+    "text": "ions et envois de messages: Message asynchrone: Dans ce cas, l’émetteur n’attend pas la réponse à son message, il poursuit l’éxecution de ses opérations. C’est la demi-flèche qui symbolise ce type de message. Cela décrit le comportement de l’appel (est-ce que l’objet attend ou non).",
+    "source": "Chapitre 4 - Diagramme de séquence.pdf",
+    "page_number": 9
+  },
+  {
+    "chunk_id": "Chapitre 4 - Diagramme de séquence.pdf_p10_c0",
+    "text": "Syntaxe des messages : La syntaxe des messages est : nomSignalOuOperation ( parametres ) La syntaxe des arguments est la suivante : nomParametre = valeurParametre Pour un argument modifiable : nomParametre : valeurParametre 3- Activations et envois de messages: Exemples : appeler(\"Capitaine Hadock\", 54214110) afficher(x,y) initialiser(x=100) f(x:12)",
+    "source": "Chapitre 4 - Diagramme de séquence.pdf",
+    "page_number": 10
+  },
+  {
+    "chunk_id": "Chapitre 4 - Diagramme de séquence.pdf_p11_c0",
+    "text": "Syntaxe des messages de retour : La syntaxe des messages de retour est : attributCible = nomOperation ( params ) : valeurRetour La syntaxe des paramètres est : nomParam = valeurParam Les messages de retour sont représentés en pointillés. 3- Activations et envois de messages: Utilisateur → Systeme : authentifier(login, mdp) resultat = authentifier() : true Panier → Article : getPrix() p = getPrix() : 10.5 Exemples :",
+    "source": "Chapitre 4 - Diagramme de séquence.pdf",
+    "page_number": 11
+  },
+  {
+    "chunk_id": "Chapitre 4 - Diagramme de séquence.pdf_p1_c0",
+    "text": "Chapitre IV: Représenté par : Mme Rhaiem Diagramme deséquence",
+    "source": "Chapitre 4 - Diagramme de séquence.pdf",
+    "page_number": 1
+  },
+  {
+    "chunk_id": "Chapitre 4 - Diagramme de séquence.pdf_p2_c0",
+    "text": "Description des cas d'utilisation 1- Introduction Les diagrammes de séquences permettent de décrire COMMENT les éléments du système interagissent entre eux et avec les acteurs. Les objets au cœur d'un système interagissent en s'échangeant des messages. Les acteurs interagissent avec le système au moyen d'IHM (Interfaces Homme-Machine). Les diagrammes de cas d'utilisation modélisent à QUOI sert le système, en organisant les interactions possibles avec les acteurs. Use Case = Qui ? + Fait quoi ? +",
+    "source": "Chapitre 4 - Diagramme de séquence.pdf",
+    "page_number": 2
+  },
+  {
+    "chunk_id": "Chapitre 4 - Diagramme de séquence.pdf_p2_c1",
+    "text": "avec les acteurs. Use Case = Qui ? + Fait quoi ? + Avec le système Les diagrammes de classes permettent de spécifier la structure et les liens entre les objets dont le système est composé Diagramme de classes = Classes + Attributs + Relations",
+    "source": "Chapitre 4 - Diagramme de séquence.pdf",
+    "page_number": 2
+  },
+  {
+    "chunk_id": "Chapitre 4 - Diagramme de séquence.pdf_p3_c0",
+    "text": "Formalisme : 2- Formalisme",
+    "source": "Chapitre 4 - Diagramme de séquence.pdf",
+    "page_number": 3
+  },
+  {
+    "chunk_id": "Chapitre 4 - Diagramme de séquence.pdf_p4_c0",
+    "text": "Sémantique : 3- Sémantique",
+    "source": "Chapitre 4 - Diagramme de séquence.pdf",
+    "page_number": 4
+  },
+  {
+    "chunk_id": "Chapitre 4 - Diagramme de séquence.pdf_p5_c0",
+    "text": "Exemple: 3- Sémantique",
+    "source": "Chapitre 4 - Diagramme de séquence.pdf",
+    "page_number": 5
+  },
+  {
+    "chunk_id": "Chapitre 4 - Diagramme de séquence.pdf_p6_c0",
+    "text": "Activations : 3- Activations et envois de messages: Une période d’activité correspond au temps pendant lequel un objet effectue une action. On distingue trois grandes catégories d’envois de message : 1- Flot de contrôle à plat : est utilisé pour indiquer la progression vers la prochaine étape d’une séquence → simple progression du scénario étapes qui s’enchaînent Dans un flot de contrôle à plat, l’objet n’attend pas que l’action précédente se termine. Messages :",
+    "source": "Chapitre 4 - Diagramme de séquence.pdf",
+    "page_number": 6
+  },
+  {
+    "chunk_id": "Chapitre 4 - Diagramme de séquence.pdf_p6_c1",
+    "text": "mine. Messages :",
+    "source": "Chapitre 4 - Diagramme de séquence.pdf",
+    "page_number": 6
+  },
+  {
+    "chunk_id": "Chapitre 4 - Diagramme de séquence.pdf_p7_c0",
+    "text": "3- Activations et envois de messages: Ici on a un appel de fonction dans une autre fonction. Un objet appelle un autre objet, puis il doit attendre que celui-ci termine. Messages : 2- Appel de procédure ou flot de contrôle emboîté : la séquence emboîtées doit se terminer pour que la séquence englobante reprenne le contrôle",
+    "source": "Chapitre 4 - Diagramme de séquence.pdf",
+    "page_number": 7
+  },
+  {
+    "chunk_id": "Chapitre 4 - Diagramme de séquence.pdf_p8_c0",
+    "text": "3- Activations et envois de messages: C’est le message de retour après l’exécution. Messages : 3- Retour d’un appel de procédure : le retour de message est explicite à la fin de l’exécution d’une sous-procédure et le retour éventuel de paramètres. Retour = fin de l’exécution + résultat",
+    "source": "Chapitre 4 - Diagramme de séquence.pdf",
+    "page_number": 8
+  },
+  {
+    "chunk_id": "Chapitre 4 - Diagramme de séquence.pdf_p9_c0",
+    "text": "Message synchrone et asynchrone: Message synchrone: Un message synchrone bloque l'expéditeur jusqu'à la réponse du destinataire. Le flot de contrôle passe de l'émetteur au récepteur : Si un objet A invoque une méthode d'un objet B, A reste bloqué tant que B n'a pas terminé. La représentation du message de retour est facultative, il est en fait inclus dans la fin d’exécution de l’opération déclenchée dans l’objet destinataire du message 3- Activations et envois de messages: Message asynchrone: Da",
+    "source": "Chapitre 4 - Diagramme de séquence.pdf",
+    "page_number": 9
+  },
+  {
+    "chunk_id": "Chapitre 4 - Diagramme de séquence.pdf_p9_c1",
+    "text": "ions et envois de messages: Message asynchrone: Dans ce cas, l’émetteur n’attend pas la réponse à son message, il poursuit l’éxecution de ses opérations. C’est la demi-flèche qui symbolise ce type de message. Cela décrit le comportement de l’appel (est-ce que l’objet attend ou non).",
+    "source": "Chapitre 4 - Diagramme de séquence.pdf",
+    "page_number": 9
+  },
+  {
+    "chunk_id": "Chapitre 4 - Diagramme de séquence.pdf_p10_c0",
+    "text": "Syntaxe des messages : La syntaxe des messages est : nomSignalOuOperation ( parametres ) La syntaxe des arguments est la suivante : nomParametre = valeurParametre Pour un argument modifiable : nomParametre : valeurParametre 3- Activations et envois de messages: Exemples : appeler(\"Capitaine Hadock\", 54214110) afficher(x,y) initialiser(x=100) f(x:12)",
+    "source": "Chapitre 4 - Diagramme de séquence.pdf",
+    "page_number": 10
+  },
+  {
+    "chunk_id": "Chapitre 4 - Diagramme de séquence.pdf_p11_c0",
+    "text": "Syntaxe des messages de retour : La syntaxe des messages de retour est : attributCible = nomOperation ( params ) : valeurRetour La syntaxe des paramètres est : nomParam = valeurParam Les messages de retour sont représentés en pointillés. 3- Activations et envois de messages: Utilisateur → Systeme : authentifier(login, mdp) resultat = authentifier() : true Panier → Article : getPrix() p = getPrix() : 10.5 Exemples :",
+    "source": "Chapitre 4 - Diagramme de séquence.pdf",
+    "page_number": 11
   }
 ]

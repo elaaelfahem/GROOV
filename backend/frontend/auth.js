@@ -2,7 +2,7 @@
 
 // If already logged in, go straight to study room
 if (localStorage.getItem('sg_token')) {
-    window.location.href = '/';
+    window.location.href = '/lobby.html';
 }
 
 function switchTab(tab) {
@@ -57,7 +57,7 @@ async function handleLogin(e) {
             localStorage.setItem('sg_token', data.token);
             localStorage.setItem('sg_user', JSON.stringify(data.user));
             showMsg('Welcome back! Redirecting...', 'success');
-            setTimeout(() => { window.location.href = '/'; }, 800);
+            setTimeout(() => { window.location.href = '/lobby.html'; }, 800);
         } else {
             showMsg(data.error || 'Login failed', 'error');
         }
@@ -92,7 +92,7 @@ async function handleRegister(e) {
             localStorage.setItem('sg_token', data.token);
             localStorage.setItem('sg_user', JSON.stringify(data.user));
             showMsg('Account created! Redirecting...', 'success');
-            setTimeout(() => { window.location.href = '/'; }, 800);
+            setTimeout(() => { window.location.href = '/lobby.html'; }, 800);
         } else {
             showMsg(data.error || 'Registration failed', 'error');
         }

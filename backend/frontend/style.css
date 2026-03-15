@@ -1209,3 +1209,60 @@ html, body {
     align-items: center;
     justify-content: space-between;
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   STATS BAR — Score / Streak / Mastery pills
+   ═══════════════════════════════════════════════════════════════ */
+
+.stats-bar {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    background: var(--glass);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 3px 4px;
+    flex-shrink: 0;
+}
+
+.stat-pill {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    padding: 2px 8px;
+    border-radius: 14px;
+    font-size: 0.68rem;
+    font-weight: 600;
+    color: var(--text-2);
+    white-space: nowrap;
+    transition: all 0.3s ease;
+    cursor: default;
+}
+
+.stat-pill:hover {
+    background: var(--glass-2);
+    color: var(--text-1);
+}
+
+.stat-icon {
+    font-size: 0.72rem;
+    line-height: 1;
+}
+
+.stat-val {
+    font-family: 'Inter', sans-serif;
+    color: var(--text-1);
+    font-weight: 700;
+    font-size: 0.7rem;
+    letter-spacing: 0.2px;
+}
+
+/* Animate stat value updates */
+@keyframes statPop {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.25); color: var(--accent); }
+    100% { transform: scale(1); }
+}
+.stat-val.updated {
+    animation: statPop 0.4s ease;
+}
