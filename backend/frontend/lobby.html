@@ -11,8 +11,8 @@
 
         body {
             font-family: 'Inter', sans-serif;
-            background: #050510;
-            color: #eeeef5;
+            background: linear-gradient(160deg, #F5F3FF 0%, #EDE9FE 40%, #DDD6FE 100%);
+            color: #3B0764;
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -20,41 +20,43 @@
             overflow: hidden;
         }
 
-        /* Ambient background glow */
+        /* Ambient background blobs */
         body::before {
             content: '';
             position: fixed;
-            top: 40%; left: 30%;
-            width: 900px; height: 900px;
-            transform: translate(-50%, -50%);
-            background: radial-gradient(circle, rgba(91,141,239,0.06) 0%, transparent 70%);
+            top: 10%; left: -10%;
+            width: 700px; height: 700px;
+            background: radial-gradient(circle, rgba(147,51,234,0.12) 0%, transparent 70%);
             pointer-events: none;
+            border-radius: 50%;
         }
         body::after {
             content: '';
             position: fixed;
-            top: 60%; left: 70%;
-            width: 700px; height: 700px;
-            transform: translate(-50%, -50%);
-            background: radial-gradient(circle, rgba(124,91,245,0.05) 0%, transparent 70%);
+            bottom: -20%; right: -10%;
+            width: 800px; height: 800px;
+            background: radial-gradient(circle, rgba(196,181,253,0.25) 0%, transparent 70%);
             pointer-events: none;
+            border-radius: 50%;
         }
 
         .lobby-container {
             width: 100%;
-            max-width: 560px;
+            max-width: 580px;
             padding: 24px;
+            position: relative;
+            z-index: 10;
         }
 
-        /* Brand */
+        /* Brand Header */
         .brand {
             text-align: center;
-            margin-bottom: 32px;
+            margin-bottom: 28px;
         }
         .brand-icon {
-            font-size: 3rem;
+            font-size: 3.5rem;
             display: block;
-            margin-bottom: 12px;
+            margin-bottom: 8px;
             animation: float 3s ease-in-out infinite;
         }
         @keyframes float {
@@ -62,87 +64,96 @@
             50% { transform: translateY(-8px); }
         }
         .brand h1 {
-            font-size: 1.6rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, #5b8def, #7c5bf5);
+            font-size: 1.8rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, #6B21A8, #9333EA);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
         .brand p {
-            color: #7b7b95;
-            font-size: 0.85rem;
+            color: #7C3AED;
+            font-size: 0.9rem;
             margin-top: 6px;
+            font-weight: 500;
         }
 
         /* Card */
         .lobby-card {
-            background: rgba(18, 18, 32, 0.65);
-            border: 1px solid rgba(255,255,255,0.07);
-            border-radius: 20px;
-            padding: 36px 28px;
-            backdrop-filter: blur(24px);
+            background: rgba(255, 255, 255, 0.85);
+            border: 1px solid #DDD6FE;
+            border-radius: 28px;
+            padding: 36px 32px;
+            backdrop-filter: blur(20px);
+            box-shadow: 0 20px 60px rgba(107, 33, 168, 0.08), 0 4px 12px rgba(107, 33, 168, 0.04);
         }
 
         /* Step indicator */
         .steps {
             display: flex;
             justify-content: center;
-            gap: 8px;
-            margin-bottom: 28px;
+            gap: 10px;
+            margin-bottom: 30px;
         }
         .step-dot {
-            width: 8px; height: 8px;
+            width: 10px; height: 10px;
             border-radius: 50%;
-            background: rgba(255,255,255,0.1);
+            background: #E2E8F0;
             transition: all 0.4s ease;
         }
         .step-dot.active {
-            background: #5b8def;
-            box-shadow: 0 0 10px rgba(91,141,239,0.5);
-            width: 24px;
-            border-radius: 4px;
+            background: #9333EA;
+            box-shadow: 0 0 12px rgba(147,51,234,0.4);
+            width: 28px;
+            border-radius: 5px;
         }
         .step-dot.done {
             background: #22c55e;
+            box-shadow: 0 0 12px rgba(34,197,94,0.3);
         }
 
         /* ── Upload Zone ── */
         .upload-zone {
-            border: 2px dashed rgba(91,141,239,0.25);
-            border-radius: 16px;
+            border: 2.5px dashed #C4B5FD;
+            border-radius: 20px;
             padding: 40px 24px;
             text-align: center;
             cursor: pointer;
-            transition: all 0.4s ease;
-            margin-bottom: 24px;
+            transition: all 0.3s ease;
+            margin-bottom: 28px;
             position: relative;
             overflow: hidden;
+            background: #FDFCFF;
         }
         .upload-zone:hover,
         .upload-zone.dragover {
-            border-color: #5b8def;
-            background: rgba(91,141,239,0.05);
+            border-color: #9333EA;
+            background: #F5F3FF;
             transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(147,51,234,0.1);
         }
 
         .upload-zone .upload-icon {
             font-size: 3rem;
             display: block;
             margin-bottom: 12px;
-            transition: transform 0.3s;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
         .upload-zone:hover .upload-icon {
-            transform: scale(1.1);
+            transform: scale(1.15) rotate(5deg);
         }
         .upload-zone h3 {
-            font-size: 1rem;
-            font-weight: 600;
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: #6B21A8;
             margin-bottom: 6px;
         }
         .upload-zone p {
-            font-size: 0.8rem;
-            color: #7b7b95;
+            font-size: 0.85rem;
+            color: #7C3AED;
+            opacity: 0.8;
+            font-weight: 500;
         }
         .upload-zone input[type="file"] {
             position: absolute;
@@ -157,41 +168,52 @@
             text-align: center;
             padding: 20px 0;
             margin-bottom: 24px;
+            background: #F5F3FF;
+            border-radius: 16px;
+            border: 1px solid #DDD6FE;
         }
         .indexing-panel.active { display: block; }
 
         .indexing-filename {
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: #5b8def;
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #6B21A8;
             margin-bottom: 16px;
         }
 
         .progress-track {
-            width: 100%;
-            height: 6px;
-            background: rgba(255,255,255,0.06);
-            border-radius: 3px;
+            width: 80%;
+            height: 8px;
+            background: #E2E8F0;
+            margin: 0 auto 12px;
+            border-radius: 4px;
             overflow: hidden;
-            margin-bottom: 12px;
         }
         .progress-fill {
             height: 100%;
             width: 0%;
-            background: linear-gradient(90deg, #5b8def, #7c5bf5);
-            border-radius: 3px;
+            background: linear-gradient(90deg, #9333EA, #C084FC);
+            border-radius: 4px;
             transition: width 0.4s ease;
-            animation: shimmer 1.5s ease infinite;
+            position: relative;
+            overflow: hidden;
+        }
+        .progress-fill::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transform: translateX(-100%);
+            animation: shimmer 1.5s infinite;
         }
         @keyframes shimmer {
-            0% { opacity: 0.7; }
-            50% { opacity: 1; }
-            100% { opacity: 0.7; }
+            100% { transform: translateX(100%); }
         }
 
         .indexing-status {
-            font-size: 0.75rem;
-            color: #7b7b95;
+            font-size: 0.8rem;
+            color: #7C3AED;
+            font-weight: 500;
         }
 
         /* Uploaded check */
@@ -199,78 +221,89 @@
             display: none;
             align-items: center;
             justify-content: center;
-            gap: 8px;
-            padding: 12px;
-            background: rgba(34,197,94,0.08);
-            border: 1px solid rgba(34,197,94,0.2);
-            border-radius: 12px;
-            margin-bottom: 24px;
-            font-size: 0.85rem;
-            color: #22c55e;
-            font-weight: 600;
+            gap: 10px;
+            padding: 16px;
+            background: #F0FDF4;
+            border: 2px solid #BBF7D0;
+            border-radius: 16px;
+            margin-bottom: 28px;
+            font-size: 0.9rem;
+            color: #15803D;
+            font-weight: 700;
+            box-shadow: 0 4px 12px rgba(21, 128, 61, 0.08);
         }
         .uploaded-badge.active { display: flex; }
 
         /* ── Settings (Topic + Mode) ── */
         .settings-section {
-            margin-bottom: 24px;
+            margin-bottom: 28px;
         }
         .settings-section label {
             display: block;
             font-size: 0.75rem;
-            font-weight: 600;
+            font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            color: #7b7b95;
+            color: #6B21A8;
             margin-bottom: 8px;
         }
         .settings-section input,
         .settings-section select {
             width: 100%;
-            padding: 12px 16px;
-            border: 1px solid rgba(255,255,255,0.07);
-            border-radius: 12px;
-            background: rgba(255,255,255,0.04);
-            color: #eeeef5;
+            padding: 14px 16px;
+            border: 2px solid #DDD6FE;
+            border-radius: 14px;
+            background: #FDFCFF;
+            color: #3B0764;
             font-family: inherit;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
+            font-weight: 500;
             outline: none;
             transition: border 0.3s ease, box-shadow 0.3s ease;
             appearance: none;
             -webkit-appearance: none;
-            margin-bottom: 16px;
+            margin-bottom: 20px;
+        }
+        .settings-section select {
+            cursor: pointer;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%237C3AED'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 16px center;
+            background-size: 16px;
+            padding-right: 40px;
         }
         .settings-section input:focus,
         .settings-section select:focus {
-            border-color: #5b8def;
-            box-shadow: 0 0 0 3px rgba(91,141,239,0.15);
+            border-color: #9333EA;
+            box-shadow: 0 0 0 4px rgba(147,51,234,0.12);
         }
         .settings-section input::placeholder {
-            color: #4a4a60;
+            color: #C4B5FD;
         }
         .settings-section select option {
-            background: #12121f;
-            color: #eeeef5;
+            background: #fff;
+            color: #3B0764;
         }
 
         /* ── Enter Button ── */
         .enter-btn {
             width: 100%;
-            padding: 16px;
+            padding: 18px;
             border: none;
-            border-radius: 14px;
-            background: linear-gradient(135deg, #5b8def, #7c5bf5);
+            border-radius: 18px;
+            background: linear-gradient(135deg, #7C3AED, #9333EA);
             color: #fff;
             font-family: inherit;
-            font-size: 1rem;
-            font-weight: 700;
+            font-size: 1.05rem;
+            font-weight: 800;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             letter-spacing: 0.5px;
+            box-shadow: 0 4px 12px rgba(124,58,237,0.25);
         }
         .enter-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(91,141,239,0.35);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(124,58,237,0.4);
         }
         .enter-btn:active {
             transform: translateY(0);
@@ -279,46 +312,54 @@
             opacity: 0.5;
             cursor: not-allowed;
             transform: none;
+            box-shadow: none;
+            background: #C4B5FD;
         }
 
         /* Skip link */
         .skip-link {
             display: block;
             text-align: center;
-            margin-top: 16px;
-            color: #4a4a60;
-            font-size: 0.8rem;
+            margin-top: 20px;
+            color: #9333EA;
+            font-weight: 600;
+            font-size: 0.85rem;
             cursor: pointer;
             transition: color 0.3s;
             text-decoration: none;
         }
         .skip-link:hover {
-            color: #7b7b95;
+            color: #6B21A8;
+            text-decoration: underline;
         }
 
         /* Footer */
         .lobby-footer {
             text-align: center;
-            margin-top: 20px;
-            color: #4a4a60;
+            margin-top: 24px;
+            color: #9333EA;
             font-size: 0.75rem;
+            font-weight: 500;
+            opacity: 0.7;
         }
 
         /* Welcome banner */
         .welcome-banner {
             text-align: center;
-            margin-bottom: 24px;
-            padding: 12px;
-            background: rgba(91,141,239,0.06);
-            border-radius: 12px;
-            border: 1px solid rgba(91,141,239,0.1);
+            margin-bottom: 28px;
+            padding: 14px;
+            background: #F5F3FF;
+            border-radius: 16px;
+            border: 1px solid #C4B5FD;
+            font-weight: 500;
         }
         .welcome-banner span {
-            font-size: 0.85rem;
-            color: #94a3b8;
+            font-size: 0.9rem;
+            color: #6B21A8;
         }
         .welcome-banner strong {
-            color: #5b8def;
+            color: #9333EA;
+            font-weight: 800;
         }
     </style>
 </head>
@@ -328,7 +369,7 @@
         <div class="brand">
             <span class="brand-icon">📚</span>
             <h1>Prepare Your Session</h1>
-            <p>Upload your notes, set your topic, and jump in</p>
+            <p>Upload notes, set the vibe, and jump in 🚀</p>
         </div>
 
         <!-- Welcome -->
@@ -370,7 +411,7 @@
             <!-- Settings -->
             <div class="settings-section">
                 <label>Study Topic</label>
-                <input type="text" id="lobbyTopic" placeholder="e.g. Photosynthesis, UML Diagrams, Linear Algebra...">
+                <input type="text" id="lobbyTopic" placeholder="e.g. Photosynthesis, UML Diagrams...">
 
                 <label>Study Mode</label>
                 <select id="lobbyMode">
@@ -391,7 +432,7 @@
             </a>
         </div>
 
-        <div class="lobby-footer">Powered by Ollama · Local AI · Your data stays yours</div>
+        <div class="lobby-footer">Powered by Ollama · 100% Local AI · Your data stays yours</div>
     </div>
 
     <script src="/static/lobby.js"></script>

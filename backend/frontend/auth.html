@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Study Group — Login</title>
+    <title>Groov — Get in the Groove</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
@@ -11,8 +11,8 @@
 
         body {
             font-family: 'Inter', sans-serif;
-            background: #050510;
-            color: #eeeef5;
+            background: linear-gradient(160deg, #F5F3FF 0%, #EDE9FE 40%, #DDD6FE 100%);
+            color: #3B0764;
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -20,72 +20,104 @@
             overflow: hidden;
         }
 
-        /* Ambient background glow */
+        /* Soft ambient blobs */
         body::before {
             content: '';
             position: fixed;
-            top: 50%; left: 50%;
-            width: 800px; height: 800px;
-            transform: translate(-50%, -50%);
-            background: radial-gradient(circle, rgba(91,141,239,0.08) 0%, transparent 70%);
+            top: -20%; right: -10%;
+            width: 600px; height: 600px;
+            background: radial-gradient(circle, rgba(147,51,234,0.12) 0%, transparent 70%);
             pointer-events: none;
+            border-radius: 50%;
+        }
+        body::after {
+            content: '';
+            position: fixed;
+            bottom: -15%; left: -10%;
+            width: 500px; height: 500px;
+            background: radial-gradient(circle, rgba(196,181,253,0.25) 0%, transparent 70%);
+            pointer-events: none;
+            border-radius: 50%;
         }
 
         .auth-container {
             width: 100%;
-            max-width: 420px;
+            max-width: 440px;
             padding: 20px;
         }
 
         /* Logo / Brand */
         .brand {
             text-align: center;
-            margin-bottom: 32px;
+            margin-bottom: 28px;
         }
-        .brand-icon {
-            font-size: 3rem;
-            display: block;
-            margin-bottom: 12px;
+        .brand-logo {
+            font-size: 2.8rem;
+            font-weight: 800;
+            letter-spacing: -2px;
+            color: #6B21A8;
+            margin-bottom: 4px;
         }
-        .brand h1 {
-            font-size: 1.6rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, #5b8def, #7c5bf5);
+        .brand-logo span {
+            display: inline-block;
+            background: linear-gradient(135deg, #7C3AED, #9333EA);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
-        .brand p {
-            color: #7b7b95;
+        .brand-tagline {
+            color: #7C3AED;
+            font-size: 0.8rem;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+        .brand-subtitle {
+            color: #6B21A8;
             font-size: 0.85rem;
-            margin-top: 6px;
+            margin-top: 8px;
+            opacity: 0.7;
+        }
+
+        /* Robot mascot decoration */
+        .mascot {
+            font-size: 3.5rem;
+            display: block;
+            margin-bottom: 8px;
+            animation: bounce 2s ease-in-out infinite;
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            25% { transform: translateY(-6px) rotate(-3deg); }
+            75% { transform: translateY(-3px) rotate(3deg); }
         }
 
         /* Card */
         .auth-card {
-            background: rgba(18, 18, 32, 0.65);
-            border: 1px solid rgba(255,255,255,0.07);
-            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.85);
+            border: 1px solid #DDD6FE;
+            border-radius: 28px;
             padding: 36px 28px;
-            backdrop-filter: blur(24px);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 20px 60px rgba(107, 33, 168, 0.08), 0 4px 12px rgba(107, 33, 168, 0.04);
         }
 
         /* Tab Toggle */
         .tab-toggle {
             display: flex;
             gap: 4px;
-            background: rgba(255,255,255,0.04);
-            border-radius: 12px;
+            background: #F5F3FF;
+            border-radius: 16px;
             padding: 4px;
             margin-bottom: 28px;
         }
         .tab-btn {
             flex: 1;
-            padding: 10px;
+            padding: 11px;
             border: none;
-            border-radius: 10px;
+            border-radius: 14px;
             background: transparent;
-            color: #7b7b95;
+            color: #7C3AED;
             font-family: inherit;
             font-size: 0.85rem;
             font-weight: 600;
@@ -93,14 +125,14 @@
             transition: all 0.3s ease;
         }
         .tab-btn.active {
-            background: rgba(91,141,239,0.15);
-            color: #5b8def;
-            box-shadow: 0 2px 8px rgba(91,141,239,0.15);
+            background: linear-gradient(135deg, #7C3AED, #9333EA);
+            color: #fff;
+            box-shadow: 0 4px 14px rgba(124,58,237,0.3);
         }
 
         /* Form */
         .form-group {
-            margin-bottom: 16px;
+            margin-bottom: 18px;
         }
         .form-group label {
             display: block;
@@ -108,27 +140,27 @@
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            color: #7b7b95;
+            color: #6B21A8;
             margin-bottom: 8px;
         }
         .form-group input {
             width: 100%;
-            padding: 12px 16px;
-            border: 1px solid rgba(255,255,255,0.07);
-            border-radius: 12px;
-            background: rgba(255,255,255,0.04);
-            color: #eeeef5;
+            padding: 13px 16px;
+            border: 2px solid #DDD6FE;
+            border-radius: 14px;
+            background: #FDFCFF;
+            color: #3B0764;
             font-family: inherit;
             font-size: 0.9rem;
             outline: none;
             transition: border 0.3s ease, box-shadow 0.3s ease;
         }
         .form-group input:focus {
-            border-color: #5b8def;
-            box-shadow: 0 0 0 3px rgba(91,141,239,0.15);
+            border-color: #9333EA;
+            box-shadow: 0 0 0 4px rgba(147,51,234,0.12);
         }
         .form-group input::placeholder {
-            color: #4a4a60;
+            color: #C4B5FD;
         }
 
         /* Submit Button */
@@ -136,8 +168,8 @@
             width: 100%;
             padding: 14px;
             border: none;
-            border-radius: 12px;
-            background: linear-gradient(135deg, #5b8def, #7c5bf5);
+            border-radius: 16px;
+            background: linear-gradient(135deg, #7C3AED, #9333EA);
             color: #fff;
             font-family: inherit;
             font-size: 0.95rem;
@@ -145,10 +177,11 @@
             cursor: pointer;
             transition: all 0.3s ease;
             margin-top: 8px;
+            letter-spacing: 0.3px;
         }
         .submit-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(91,141,239,0.3);
+            box-shadow: 0 10px 30px rgba(124,58,237,0.35);
         }
         .submit-btn:active {
             transform: translateY(0);
@@ -161,23 +194,24 @@
 
         /* Error / Success Messages */
         .msg {
-            padding: 10px 14px;
-            border-radius: 10px;
-            font-size: 0.8rem;
+            padding: 12px 16px;
+            border-radius: 14px;
+            font-size: 0.82rem;
             margin-bottom: 16px;
             display: none;
+            font-weight: 500;
         }
         .msg.error {
             display: block;
-            background: rgba(239,68,68,0.12);
-            border: 1px solid rgba(239,68,68,0.25);
-            color: #fca5a5;
+            background: rgba(239,68,68,0.08);
+            border: 1px solid rgba(239,68,68,0.2);
+            color: #dc2626;
         }
         .msg.success {
             display: block;
-            background: rgba(34,197,94,0.12);
-            border: 1px solid rgba(34,197,94,0.25);
-            color: #86efac;
+            background: rgba(34,197,94,0.08);
+            border: 1px solid rgba(34,197,94,0.2);
+            color: #16a34a;
         }
 
         /* Hide forms by default */
@@ -188,8 +222,9 @@
         .auth-footer {
             text-align: center;
             margin-top: 20px;
-            color: #4a4a60;
+            color: #9333EA;
             font-size: 0.75rem;
+            opacity: 0.6;
         }
     </style>
 </head>
@@ -197,9 +232,10 @@
     <div class="auth-container">
         <!-- Brand -->
         <div class="brand">
-            <span class="brand-icon">🧠</span>
-            <h1>AI Study Group</h1>
-            <p>Your virtual study room is waiting</p>
+            <span class="mascot">🤖</span>
+            <div class="brand-logo"><span>groov</span></div>
+            <div class="brand-tagline">Get in the Groove</div>
+            <p class="brand-subtitle">Your AI-powered virtual study room</p>
         </div>
 
         <!-- Auth Card -->
@@ -248,7 +284,7 @@
             </div>
         </div>
 
-        <div class="auth-footer">Powered by Ollama · Local AI · Your data stays yours</div>
+        <div class="auth-footer">Powered by Ollama · 100% Local AI · Your data stays yours 🔒</div>
     </div>
 
     <script src="/static/auth.js"></script>
