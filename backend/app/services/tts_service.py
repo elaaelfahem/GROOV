@@ -6,9 +6,9 @@ logger = logging.getLogger(__name__)
 PERSONA_VOICES = {
     "genius": "en-US-GuyNeural",
     "confused": "en-US-JennyNeural",
-    "skeptic": "en-US-DavisNeural",
+    "skeptic": "en-US-ChristopherNeural",
     "summarizer": "en-US-AriaNeural",
-    "quiz_master": "en-US-ChristopherNeural",
+    "quiz_master": "en-US-SteffanNeural",
     "organizer": "en-US-SaraNeural",
 }
 

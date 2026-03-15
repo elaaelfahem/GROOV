@@ -28,8 +28,17 @@
                     <option value="deep_understanding">🔬 Deep Understanding</option>
                     <option value="quick_review">⚡ Quick Review</option>
                 </select>
+                <!-- PDF Upload -->
+                <label class="upload-btn" title="Upload lecture notes (PDF/TXT)">
+                    📄
+                    <input type="file" id="fileInput" accept=".pdf,.txt" style="display:none">
+                </label>
+                <span id="fileStatus" class="file-status"></span>
             </div>
             <div class="header-right">
+                <button onclick="logout()" class="theme-toggle" title="Log out" style="color:#ef4444;">
+                    <span>🚪</span>
+                </button>
                 <button id="themeToggle" class="theme-toggle" title="Toggle Light/Dark Mode">
                     <span class="theme-icon">🌙</span>
                 </button>
@@ -82,8 +91,10 @@
                         <div class="char-glow"></div>
                         <div class="char-img char-img-video" id="selfCamCircle">
                             <video id="userVideo" autoplay muted playsinline></video>
-                            <div class="self-placeholder">👤</div>
+                            <div class="self-placeholder" id="selfPlaceholder">👤</div>
                         </div>
+                        <!-- Emotion indicator floats next to face -->
+                        <span id="emotionBadge" class="emotion-badge emotion-badge-avatar" title="Detected student emotion"></span>
                     </div>
                     <div class="char-plate"><span class="plate-dot plate-dot-you"></span><span>You</span><span class="plate-emoji">🎓</span></div>
                     <div class="char-shadow"></div>
@@ -183,10 +194,18 @@
 
             <!-- ── Chat Panel ── -->
             <aside class="chat-panel" id="chatPanel">
-                <div class="chat-header"><h3>Group Chat</h3></div>
+                <div class="chat-header">
+                    <h3>Group Chat</h3>
+                </div>
+                <!-- Struggle Alert Banner -->
+                <div id="struggleAlert" class="struggle-alert" style="display:none">
+                    <span>⚠️ Struggle detected — switching to <strong>Deep Understanding</strong> mode</span>
+                    <span id="struggleArea" class="struggle-area"></span>
+                </div>
                 <div class="messages" id="messages">
                     <div class="system-msg join-msg">🧠 Study room is ready — say something to begin!</div>
                 </div>
+
                 <div class="chat-input-area">
                     <input type="text" id="userInput" placeholder="Type a message..." autocomplete="off">
                     <button id="sendBtn" class="send-btn">Send</button>
@@ -205,6 +224,26 @@
         <p class="loading-text" id="loadingText">Study group is thinking...</p>
     </div>
 
+    <!-- Feynman Evaluation Card -->
+    <div class="feynman-card" id="feynmanCard" style="display:none">
+        <div class="feynman-header">🧪 Feynman Evaluation</div>
+        <div class="feynman-body" id="feynmanBody"></div>
+        <button class="feynman-close" onclick="document.getElementById('feynmanCard').style.display='none'">✕</button>
+    </div>
+
+    <!-- End Session Modal -->
+    <div class="modal-overlay" id="endModal" style="display:none">
+        <div class="modal-box">
+            <h2 class="modal-title">📊 Session Complete</h2>
+            <div class="modal-score" id="modalScore">—</div>
+            <p class="modal-feedback" id="modalFeedback">Evaluating your session...</p>
+            <div class="modal-stats" id="modalStats"></div>
+            <button class="modal-btn" onclick="document.getElementById('endModal').style.display='none'">Start New Session</button>
+        </div>
+    </div>
+
+    <!-- face-api.js for emotion detection -->
+    <script defer src="https://cdn.jsdelivr.net/npm/@vladmandic/face-api/dist/face-api.min.js"></script>
     <script src="/static/app.js"></script>
 </body>
 </html>

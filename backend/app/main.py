@@ -7,6 +7,7 @@ from fastapi.staticfiles import StaticFiles
 from app.routers.session import router as session_router
 from app.routers.tts import router as tts_router
 from app.routers.avatar import router as avatar_router
+from app.routers.auth import router as auth_router
 from app.services.llm_service import LLMServiceError
 
 # ── Logging ──────────────────────────────────────────────────────────
@@ -36,6 +37,7 @@ app.add_middleware(
 app.include_router(session_router)
 app.include_router(tts_router)
 app.include_router(avatar_router)
+app.include_router(auth_router)
 
 
 # ── Exception Handlers ──────────────────────────────────────────────
@@ -62,3 +64,7 @@ if FRONTEND_DIR.exists():
     @app.get("/")
     async def serve_frontend():
         return FileResponse(str(FRONTEND_DIR / "index.html"))
+
+    @app.get("/auth.html")
+    async def serve_auth():
+        return FileResponse(str(FRONTEND_DIR / "auth.html"))

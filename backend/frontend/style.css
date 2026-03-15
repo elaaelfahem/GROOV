@@ -877,3 +877,335 @@ html, body {
         width: 100%;
     }
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   ADVANCED FEATURES STYLES
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── PDF Upload Button ── */
+.upload-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: var(--radius-sm);
+    background: var(--glass-2);
+    border: 1px solid var(--border);
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.2s;
+    margin-left: 8px;
+}
+.upload-btn:hover {
+    background: var(--accent);
+    border-color: var(--accent);
+    transform: scale(1.08);
+    box-shadow: 0 0 12px var(--accent-glow);
+}
+
+.file-status {
+    display: none;
+    font-size: 11px;
+    color: var(--success);
+    margin-left: 8px;
+    max-width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* ── Quick Action Hints ── */
+.chat-hints {
+    display: flex;
+    gap: 6px;
+    padding: 6px 14px;
+    flex-wrap: wrap;
+}
+
+.hint-chip {
+    display: inline-flex;
+    align-items: center;
+    padding: 5px 12px;
+    font-size: 11px;
+    font-weight: 500;
+    border-radius: 20px;
+    background: var(--glass-2);
+    border: 1px solid var(--border);
+    color: var(--text-2);
+    cursor: pointer;
+    transition: all 0.2s;
+    user-select: none;
+}
+.hint-chip:hover {
+    background: var(--accent);
+    color: #fff;
+    border-color: var(--accent);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px var(--accent-glow);
+}
+
+/* ── Feynman Evaluation Card ── */
+.feynman-card {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 340px;
+    max-height: 400px;
+    overflow-y: auto;
+    background: var(--bg-card);
+    backdrop-filter: var(--blur);
+    border: 1px solid var(--border-2);
+    border-radius: var(--radius);
+    padding: 16px;
+    z-index: 1000;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.5);
+    animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+    from { transform: translateY(20px); opacity: 0; }
+    to   { transform: translateY(0); opacity: 1; }
+}
+
+.feynman-header {
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--text-1);
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+}
+
+.feynman-close {
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    background: none;
+    border: none;
+    color: var(--text-2);
+    cursor: pointer;
+    font-size: 16px;
+}
+.feynman-close:hover { color: var(--text-1); }
+
+.fc-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 4px 0;
+    font-size: 12px;
+    color: var(--text-2);
+    line-height: 1.4;
+}
+.fc-ok { color: var(--success); font-weight: bold; }
+.fc-miss { color: var(--warning); font-weight: bold; }
+
+/* ── End Session Modal ── */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.7);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+.modal-box {
+    background: var(--bg-card);
+    backdrop-filter: var(--blur);
+    border: 1px solid var(--border-2);
+    border-radius: var(--radius-lg);
+    padding: 40px;
+    text-align: center;
+    max-width: 440px;
+    width: 90%;
+    animation: modalPop 0.4s ease;
+}
+
+@keyframes modalPop {
+    from { transform: scale(0.9); opacity: 0; }
+    to   { transform: scale(1);   opacity: 1; }
+}
+
+.modal-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text-1);
+    margin: 0 0 16px 0;
+}
+
+.modal-score {
+    font-size: 56px;
+    font-weight: 800;
+    color: var(--accent);
+    margin: 12px 0;
+    font-family: 'Inter', monospace;
+}
+
+.modal-feedback {
+    color: var(--text-2);
+    font-size: 14px;
+    line-height: 1.6;
+    margin: 0 0 24px 0;
+}
+
+.modal-stats {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    margin-bottom: 24px;
+}
+
+.modal-stat {
+    text-align: center;
+}
+.modal-stat-val {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text-1);
+}
+.modal-stat-lbl {
+    font-size: 11px;
+    color: var(--text-3);
+    margin-top: 2px;
+}
+
+.modal-btn {
+    padding: 12px 32px;
+    border: none;
+    border-radius: var(--radius-sm);
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+.modal-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px var(--accent-glow);
+}
+
+/* ── Light Mode Overrides for New Components ── */
+.light-mode .upload-btn {
+    background: rgba(15,23,42,0.06);
+    border-color: rgba(15,23,42,0.12);
+}
+.light-mode .upload-btn:hover {
+    background: var(--accent);
+}
+.light-mode .hint-chip {
+    background: rgba(15,23,42,0.05);
+    border-color: rgba(15,23,42,0.1);
+    color: #475569;
+}
+.light-mode .hint-chip:hover {
+    background: var(--accent);
+    color: #fff;
+}
+.light-mode .feynman-card {
+    background: rgba(255,255,255,0.95);
+    border-color: rgba(15,23,42,0.12);
+}
+.light-mode .feynman-header { color: #1e293b; }
+.light-mode .fc-item { color: #475569; }
+.light-mode .modal-box {
+    background: rgba(255,255,255,0.97);
+    border-color: rgba(15,23,42,0.12);
+}
+.light-mode .modal-title { color: #1e293b; }
+.light-mode .modal-score { color: var(--accent); }
+.light-mode .modal-feedback { color: #475569; }
+.light-mode .modal-stat-val { color: #1e293b; }
+.light-mode .modal-stat-lbl { color: #94a3b8; }
+
+/* ═══════════════════════════════════════════════════════════════
+   SENTIMENT ANALYSIS — Emotion Badge & Struggle Alert
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Emotion Badge — pill in chat header */
+.emotion-badge {
+    display: none;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    animation: badgePulse 2s ease-in-out infinite;
+    transition: all 0.4s ease;
+}
+.emotion-badge.visible {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+/* Floating badge next to user's avatar face */
+.emotion-badge-avatar {
+    position: absolute;
+    top: -10px;
+    right: -25px;
+    z-index: 10;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+    background: var(--bg-card);
+    border: 1px solid var(--border-2);
+    backdrop-filter: var(--blur);
+    padding: 4px 12px;
+}
+
+.emotion-badge.happy     { background: rgba(34,197,94,0.2); color: #22c55e; border: 1px solid rgba(34,197,94,0.3); }
+.emotion-badge.confident { background: rgba(91,141,239,0.2); color: #5b8def; border: 1px solid rgba(91,141,239,0.3); }
+.emotion-badge.confused  { background: rgba(245,158,11,0.2); color: #f59e0b; border: 1px solid rgba(245,158,11,0.3); }
+.emotion-badge.sad       { background: rgba(99,102,241,0.2); color: #818cf8; border: 1px solid rgba(99,102,241,0.3); }
+.emotion-badge.stressed  { background: rgba(239,68,68,0.15); color: #ef4444; border: 1px solid rgba(239,68,68,0.3); }
+.emotion-badge.frustrated{ background: rgba(239,68,68,0.2); color: #f87171; border: 1px solid rgba(239,68,68,0.3); }
+.emotion-badge.tired     { background: rgba(148,163,184,0.2); color: #94a3b8; border: 1px solid rgba(148,163,184,0.3); }
+.emotion-badge.neutral   { background: rgba(255,255,255,0.06); color: var(--text-2); border: 1px solid var(--border); }
+
+@keyframes badgePulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+}
+
+/* Struggle Alert Banner */
+.struggle-alert {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 14px;
+    background: linear-gradient(90deg, rgba(239,68,68,0.15), rgba(245,158,11,0.1));
+    border-bottom: 1px solid rgba(239,68,68,0.25);
+    font-size: 0.75rem;
+    color: #fca5a5;
+    animation: alertSlide 0.4s ease-out;
+}
+.struggle-alert strong {
+    color: #f87171;
+}
+.struggle-area {
+    font-size: 0.7rem;
+    color: var(--text-2);
+    font-style: italic;
+}
+
+@keyframes alertSlide {
+    from { transform: translateY(-100%); opacity: 0; }
+    to   { transform: translateY(0); opacity: 1; }
+}
+
+/* Chat header layout fix for badge */
+.chat-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}

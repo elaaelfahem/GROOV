@@ -3,6 +3,29 @@
  * Realistic animated avatars with movement, speech, reactions & emotions.
  */
 
+// ── Auth Guard — redirect to login if no token ──
+(function authGuard() {
+    const token = localStorage.getItem('sg_token');
+    if (!token) {
+        window.location.href = '/auth.html';
+        return;
+    }
+    // Verify token is still valid
+    fetch('/auth/me', { headers: { 'Authorization': `Bearer ${token}` } })
+        .then(r => { if (!r.ok) throw new Error(); })
+        .catch(() => {
+            localStorage.removeItem('sg_token');
+            localStorage.removeItem('sg_user');
+            window.location.href = '/auth.html';
+        });
+})();
+
+function logout() {
+    localStorage.removeItem('sg_token');
+    localStorage.removeItem('sg_user');
+    window.location.href = '/auth.html';
+}
+
 // ═══════════════════════════════════════════════════════════════
 //  CONSTANTS & CONFIGURATION
 // ═══════════════════════════════════════════════════════════════
@@ -61,6 +84,13 @@ const state = {
     characters: {},
     audioCtx: null,
     pomodoro: { timeLeft: 25 * 60, isActive: false, timer: null },
+    // ── Advanced Features ──
+    userEmotion: 'neutral',
+    waitingForFeynman: false,
+    mastery: 0,
+    questionsAnswered: 0,
+    pdfContext: null,
+    streak: 0,
 };
 
 // ═══════════════════════════════════════════════════════════════
@@ -90,6 +120,18 @@ const el = {
     tableTopic:     $('#tableTopic'),
     ambientLayer:   $('#ambientLayer'),
     virtualRoom:    $('#virtualRoom'),
+    // ── Advanced Feature Elements ──
+    fileInput:      $('#fileInput'),
+    fileStatus:     $('#fileStatus'),
+    feynmanCard:    $('#feynmanCard'),
+    feynmanBody:    $('#feynmanBody'),
+    endModal:       $('#endModal'),
+    modalScore:     $('#modalScore'),
+    modalFeedback:  $('#modalFeedback'),
+    modalStats:     $('#modalStats'),
+    hintFeynman:    $('#hintFeynman'),
+    hintQuiz:       $('#hintQuiz'),
+    hintSummary:    $('#hintSummary'),
 };
 
 // ═══════════════════════════════════════════════════════════════
@@ -551,6 +593,34 @@ function initEvents() {
     el.micBtn.addEventListener('mouseup', stopListening);
     el.micBtn.addEventListener('touchstart', (e) => { e.preventDefault(); startListening(); });
     el.micBtn.addEventListener('touchend', stopListening);
+
+    // ── PDF Upload ──
+    if (el.fileInput) {
+        el.fileInput.addEventListener('change', handleFileUpload);
+    }
+
+    // ── Quick Action Hints ──
+    if (el.hintFeynman) {
+        el.hintFeynman.addEventListener('click', triggerFeynman);
+    }
+    if (el.hintQuiz) {
+        el.hintQuiz.addEventListener('click', () => {
+            el.userInput.value = '🎯 Quiz me on this topic';
+            sendMessage();
+        });
+    }
+    if (el.hintSummary) {
+        el.hintSummary.addEventListener('click', () => {
+            el.userInput.value = '📋 Summarize what we covered so far';
+            sendMessage();
+        });
+    }
+
+    // ── End Session Button ──
+    const endBtn = document.querySelector('.end-btn');
+    if (endBtn) {
+        endBtn.addEventListener('click', endSession);
+    }
 }
 
 // ═══════════════════════════════════════════════════════════════
@@ -567,22 +637,31 @@ async function sendMessage() {
     showLoading(true);
 
     try {
+        const token = localStorage.getItem('sg_token') || '';
         const response = await fetch('/session/respond', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
             body: JSON.stringify({
                 session_id: state.sessionId,
                 topic: el.topicInput.value,
                 mode: el.modeSelect.value,
                 user_message: text,
                 history: formatHistory(),
-                course_context: ""
+                course_context: "",
+                user_emotion: state.userEmotion,
             })
         });
 
         if (!response.ok) throw new Error('Backend error');
         const data = await response.json();
         showLoading(false);
+        state.questionsAnswered++;
+
+        // ── Sentiment Analysis — show emotion badge ──
+        updateEmotionBadge(data);
 
         // Apply evaluation-based emotional reactions
         if (data.evaluation) {
@@ -592,9 +671,13 @@ async function sendMessage() {
         // Process persona responses with full room interactions
         await processResponses(data.responses);
 
-        // Mode suggestion
+        // ── Struggle Detection — auto-switch mode ──
         if (data.suggested_mode) {
-            addSystemMessage(`💡 Suggestion: switch to ${data.suggested_mode.replace('_', ' ')} mode`);
+            if (data.suggested_mode === 'deep_understanding' && el.modeSelect.value !== 'deep_understanding') {
+                showStruggleAlert(data.suggested_mode);
+            } else {
+                addSystemMessage(`💡 Suggestion: switch to ${data.suggested_mode.replace('_', ' ')} mode`);
+            }
             el.modeSelect.value = data.suggested_mode;
         }
 
@@ -604,6 +687,41 @@ async function sendMessage() {
         showLoading(false);
     } finally {
         state.isThinking = false;
+    }
+}
+
+// ── Emotion Badge UI ──
+const EMOTION_EMOJIS = {
+    happy: '😊', confident: '💪', confused: '😕', sad: '😢',
+    stressed: '😰', frustrated: '😤', tired: '😴', neutral: '😐'
+};
+
+function updateEmotionBadge(data) {
+    const badge = document.getElementById('emotionBadge');
+    if (!badge) return;
+
+    // Read emotion from backend's sentiment analysis
+    const emotion = (data && data.detected_emotion) ? data.detected_emotion.toLowerCase() : state.userEmotion;
+    const emoji = EMOTION_EMOJIS[emotion] || '😐';
+
+    // Must preserve both base classes
+    badge.className = 'emotion-badge emotion-badge-avatar';
+    
+    if (emotion && emotion !== 'neutral') {
+        badge.textContent = `${emoji} ${emotion}`;
+        badge.classList.add(emotion, 'visible');
+    } else {
+        badge.textContent = `${emoji} neutral`;
+        badge.classList.add('neutral', 'visible');
+    }
+}
+
+function showStruggleAlert(newMode) {
+    const alert = document.getElementById('struggleAlert');
+    if (alert) {
+        alert.style.display = 'flex';
+        addSystemMessage(`⚠️ The study group noticed you're struggling — automatically switching to **Deep Understanding** mode. We'll slow down and use more examples.`);
+        setTimeout(() => { alert.style.display = 'none'; }, 8000);
     }
 }
 
@@ -845,4 +963,387 @@ function notifyPomodoroEnd() {
 
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+// ═══════════════════════════════════════════════════════════════
+//  📄 PDF UPLOAD
+// ═══════════════════════════════════════════════════════════════
+
+async function handleFileUpload(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    el.fileStatus.textContent = '⏳ Uploading...';
+    el.fileStatus.style.display = 'inline';
+
+    try {
+        const formData = new FormData();
+        formData.append('session_id', state.sessionId);
+        formData.append('file', file);
+
+        const token = localStorage.getItem('sg_token') || '';
+        const response = await fetch('/session/upload', {
+            method: 'POST',
+            headers: { 'Authorization': `Bearer ${token}` },
+            body: formData,
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+            el.fileStatus.textContent = `🔄 Indexing ${data.filename}...`;
+            addSystemMessage(`📄 ${data.filename} uploaded! Indexing with AI embeddings — this may take a moment...`);
+
+            // Poll for indexing completion
+            pollRagStatus();
+        } else {
+            el.fileStatus.textContent = `❌ ${data.error || 'Upload failed'}`;
+        }
+    } catch (e) {
+        el.fileStatus.textContent = '❌ Upload failed';
+        console.error('File upload error:', e);
+    }
+}
+
+async function pollRagStatus() {
+    const dots = ['⠋','⠙','⠹','⠸','⠼','⠴','⠦','⠧','⠇','⠏'];
+    let tick = 0;
+
+    const poll = setInterval(async () => {
+        try {
+            const token = localStorage.getItem('sg_token') || '';
+            const res = await fetch(`/session/upload-status?session_id=${state.sessionId}`, {
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+            const info = await res.json();
+
+            if (info.status === 'ready') {
+                clearInterval(poll);
+                state.pdfContext = true;
+                el.fileStatus.textContent = `✅ ${info.filename} indexed!`;
+
+                // Auto-fill topic from document if detected
+                if (info.detected_topic) {
+                    el.topicInput.value = info.detected_topic;
+                    el.tableTopic.textContent = info.detected_topic;
+                    addSystemMessage(`🧠 RAG indexing complete! Topic detected: "${info.detected_topic}" — agents will reference your course materials.`);
+                } else {
+                    addSystemMessage(`🧠 RAG indexing complete! Agents now have deep knowledge of your lecture notes.`);
+                }
+            } else if (info.status === 'error') {
+                clearInterval(poll);
+                el.fileStatus.textContent = `❌ Indexing failed`;
+                addSystemMessage(`❌ RAG indexing failed: ${info.error || 'Unknown error'}`);
+            } else {
+                // Still processing — animate
+                el.fileStatus.textContent = `${dots[tick % dots.length]} Indexing...`;
+                tick++;
+            }
+        } catch (e) {
+            // Network error, keep trying
+            tick++;
+        }
+    }, 2000);
+}
+
+// ═══════════════════════════════════════════════════════════════
+//  🧪 FEYNMAN METHOD — "Explain it to me"
+// ═══════════════════════════════════════════════════════════════
+
+function triggerFeynman() {
+    state.waitingForFeynman = true;
+    addSystemMessage('🧪 Feynman Mode: Explain the current topic in your own words! The AI will evaluate your understanding.');
+    el.userInput.placeholder = 'Explain the topic in your own words...';
+    el.userInput.focus();
+}
+
+// Override sendMessage to handle Feynman state
+const _originalSendMessage = sendMessage;
+
+async function sendMessageWithFeynman() {
+    if (state.waitingForFeynman) {
+        const text = el.userInput.value.trim();
+        if (!text || state.isThinking) return;
+
+        el.userInput.value = '';
+        el.userInput.placeholder = 'Type a message...';
+        addMessage('you', text);
+        state.waitingForFeynman = false;
+        state.isThinking = true;
+        showLoading(true);
+
+        try {
+            const token = localStorage.getItem('sg_token') || '';
+            const response = await fetch('/session/feynman', {
+                method: 'POST',
+                headers: { 
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({
+                    session_id: state.sessionId,
+                    topic: el.topicInput.value,
+                    student_explanation: text,
+                    course_context: '',
+                }),
+            });
+
+            const data = await response.json();
+            showLoading(false);
+
+            // Show the Feynman evaluation card
+            showFeynmanCard(data);
+
+            // Have Julian respond with encouragement
+            const scoreMsg = data.score >= 80
+                ? `Excellent explanation! You clearly understand the core concept. Score: ${data.score}/100 🎉`
+                : `Good attempt! ${data.improvement || 'Try adding more detail.'} Score: ${data.score}/100`;
+            addMessage('genius', scoreMsg);
+
+            state.history.push(`Student (Feynman explanation): ${text}`);
+            state.history.push(`Julian: ${scoreMsg}`);
+
+        } catch (e) {
+            showLoading(false);
+            addSystemMessage('❌ Feynman evaluation failed. Try again!');
+        } finally {
+            state.isThinking = false;
+        }
+        return;
+    }
+
+    // Normal flow
+    return _originalSendMessage.call(this);
+}
+
+// Replace the sendMessage reference in events
+function patchSendMessage() {
+    el.sendBtn.removeEventListener('click', sendMessage);
+    el.sendBtn.addEventListener('click', sendMessageWithFeynman);
+    el.userInput.removeEventListener('keypress', sendMessage);
+    el.userInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') sendMessageWithFeynman();
+    });
+}
+
+function showFeynmanCard(data) {
+    if (!el.feynmanCard || !el.feynmanBody) return;
+
+    let html = '';
+
+    if (data.correct && data.correct.length > 0) {
+        data.correct.forEach(point => {
+            html += `<div class="fc-item"><span class="fc-ok">✓</span> ${point}</div>`;
+        });
+    }
+
+    if (data.good_analogy) {
+        html += `<div class="fc-item"><span class="fc-ok">✓</span> Good analogy used</div>`;
+    }
+
+    if (data.missing && data.missing.length > 0) {
+        data.missing.forEach(point => {
+            html += `<div class="fc-item"><span class="fc-miss">⚠</span> Missing: ${point}</div>`;
+        });
+    }
+
+    html += `<div style="margin-top:8px;padding-top:8px;border-top:1px solid rgba(255,255,255,0.1);font-size:12px;color:#94a3b8">
+        Explanation score: <strong style="color:#4a9eff;font-family:monospace">${data.score}/100</strong>
+    </div>`;
+
+    el.feynmanBody.innerHTML = html;
+    el.feynmanCard.style.display = 'block';
+}
+
+// ═══════════════════════════════════════════════════════════════
+//  📊 END SESSION EVALUATION
+// ═══════════════════════════════════════════════════════════════
+
+async function endSession() {
+    if (!el.endModal) return;
+
+    el.endModal.style.display = 'flex';
+    el.modalScore.textContent = '...';
+    el.modalFeedback.textContent = 'Evaluating your session...';
+
+    try {
+        const token = localStorage.getItem('sg_token') || '';
+        const response = await fetch('/session/evaluate', {
+            method: 'POST',
+            headers: { 
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({
+                session_id: state.sessionId,
+                topic: el.topicInput.value,
+                history: formatHistory(),
+            }),
+        });
+
+        const data = await response.json();
+
+        el.modalScore.textContent = `${data.score}%`;
+        el.modalFeedback.textContent = data.feedback;
+
+        const stats = [
+            { val: state.questionsAnswered, lbl: 'Messages sent' },
+            { val: state.streak, lbl: 'Focus streak' },
+            { val: state.pdfContext ? '✅' : '—', lbl: 'Notes uploaded' },
+        ];
+
+        if (el.modalStats) {
+            el.modalStats.innerHTML = stats.map(s =>
+                `<div class="modal-stat"><div class="modal-stat-val">${s.val}</div><div class="modal-stat-lbl">${s.lbl}</div></div>`
+            ).join('');
+        }
+
+        if (data.strong_areas && data.strong_areas.length > 0) {
+            el.modalFeedback.innerHTML += `<br><br><strong>Strong:</strong> ${data.strong_areas.join(', ')}`;
+        }
+        if (data.review_areas && data.review_areas.length > 0) {
+            el.modalFeedback.innerHTML += `<br><strong>Review:</strong> ${data.review_areas.join(', ')}`;
+        }
+
+    } catch (e) {
+        el.modalScore.textContent = '—';
+        el.modalFeedback.textContent = 'Could not evaluate session. Good work anyway!';
+    }
+}
+
+// ═══════════════════════════════════════════════════════════════
+//  😢 EMOTION DETECTION (face-api.js)
+// ═══════════════════════════════════════════════════════════════
+
+async function initEmotionTracking() {
+    // Wait a bit for face-api to load
+    await sleep(2000);
+
+    if (typeof faceapi === 'undefined') {
+        console.warn('face-api.js not loaded — emotion detection disabled');
+        return;
+    }
+
+    try {
+        const MODEL_URL = 'https://unpkg.com/@vladmandic/face-api/model';
+        await Promise.all([
+            faceapi.nets.tinyFaceDetector.loadFromUri(MODEL_URL),
+            faceapi.nets.faceExpressionNet.loadFromUri(MODEL_URL),
+        ]);
+        console.log('face-api models loaded — emotion tracking active');
+
+        const videoEl = el.userVideo;
+        if (!videoEl || !videoEl.srcObject) {
+            console.warn('No camera stream for emotion tracking');
+            return;
+        }
+
+        // Scan every 3 seconds
+        setInterval(async () => {
+            try {
+                const detections = await faceapi.detectSingleFace(
+                    videoEl,
+                    new faceapi.TinyFaceDetectorOptions()
+                ).withFaceExpressions();
+
+                if (detections) {
+                    const expressions = detections.expressions;
+                    let dominant = 'neutral';
+                    let maxScore = expressions.neutral || 0;
+
+                    for (const [expr, val] of Object.entries(expressions)) {
+                        if (expr !== 'neutral' && val > 0.15) {
+                            if (val > maxScore || dominant === 'neutral') {
+                                maxScore = val;
+                                dominant = expr;
+                            }
+                        }
+                    }
+
+                    // Map face-api emotions to simpler categories
+                    if (dominant === 'fearful' || dominant === 'angry') dominant = 'stressed';
+
+                    state.userEmotion = dominant;
+                }
+            } catch (e) {
+                // Silently ignore detection errors
+            }
+        }, 3000);
+
+    } catch (e) {
+        console.warn('Emotion tracking init failed:', e);
+    }
+}
+
+// Start emotion tracking after camera init
+const _originalStartCamera = startUserCamera;
+async function startUserCameraWithEmotion() {
+    await _originalStartCamera();
+    initEmotionTracking();
+}
+
+// ═══════════════════════════════════════════════════════════════
+//  LATE INIT — Patch in advanced feature hooks
+// ═══════════════════════════════════════════════════════════════
+
+// Wait for DOMContentLoaded to be sure all elements are ready
+document.addEventListener('DOMContentLoaded', () => {
+    // Give the main init a moment to run, then patch
+    setTimeout(() => {
+        patchSendMessage();
+        loadPreviousSession();
+    }, 100);
+});
+
+
+// ── Load previous session from server ──
+async function loadPreviousSession() {
+    const token = localStorage.getItem('sg_token');
+    if (!token) return;
+
+    try {
+        const res = await fetch('/session/load', {
+            headers: { 'Authorization': `Bearer ${token}` }
+        });
+        const data = await res.json();
+
+        if (data.found) {
+            // Restore session state
+            state.sessionId = data.session_id;
+            state.questionsAnswered = data.turn_count || 0;
+            state.mastery = data.mastery || 0;
+            state.streak = data.streak || 0;
+
+            // Restore topic and mode
+            if (data.topic && el.topicInput) {
+                el.topicInput.value = data.topic;
+            }
+            if (data.mode && el.modeSelect) {
+                el.modeSelect.value = data.mode;
+            }
+
+            // Restore chat history
+            if (data.history && data.history.length > 0) {
+                addSystemMessage(`📂 Previous session restored — ${data.turn_count} turns, topic: "${data.topic || 'general'}"`);
+                // Show last few messages so user has context
+                const recent = data.history.slice(-10);
+                for (const msg of recent) {
+                    if (msg.role === 'user') {
+                        addMessage('you', msg.content, true);
+                    } else if (msg.speaker) {
+                        addMessage(msg.speaker, msg.content, true);
+                    }
+                }
+                addSystemMessage('💬 Conversation restored — continue where you left off!');
+            }
+
+            if (data.pdf_filename) {
+                addSystemMessage(`📄 PDF loaded: ${data.pdf_filename}`);
+            }
+
+            console.log('Session restored:', data.session_id);
+        }
+    } catch (e) {
+        console.warn('Could not load previous session:', e);
+    }
 }

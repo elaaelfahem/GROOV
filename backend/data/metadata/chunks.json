@@ -1,0 +1,770 @@
+[
+  {
+    "chunk_id": "Chapitre 4 - Diagramme de séquence.pdf_p1_c0",
+    "text": "Chapitre IV: Représenté par : Mme Rhaiem Diagramme deséquence",
+    "source": "Chapitre 4 - Diagramme de séquence.pdf",
+    "page_number": 1
+  },
+  {
+    "chunk_id": "Chapitre 4 - Diagramme de séquence.pdf_p2_c0",
+    "text": "Description des cas d'utilisation 1- Introduction Les diagrammes de séquences permettent de décrire COMMENT les éléments du système interagissent entre eux et avec les acteurs. Les objets au cœur d'un système interagissent en s'échangeant des messages. Les acteurs interagissent avec le système au moyen d'IHM (Interfaces Homme-Machine). Les diagrammes de cas d'utilisation modélisent à QUOI sert le système, en organisant les interactions possibles avec les acteurs. Use Case = Qui ? + Fait quoi ? +",
+    "source": "Chapitre 4 - Diagramme de séquence.pdf",
+    "page_number": 2
+  },
+  {
+    "chunk_id": "Chapitre 4 - Diagramme de séquence.pdf_p2_c1",
+    "text": "avec les acteurs. Use Case = Qui ? + Fait quoi ? + Avec le système Les diagrammes de classes permettent de spécifier la structure et les liens entre les objets dont le système est composé Diagramme de classes = Classes + Attributs + Relations",
+    "source": "Chapitre 4 - Diagramme de séquence.pdf",
+    "page_number": 2
+  },
+  {
+    "chunk_id": "Chapitre 4 - Diagramme de séquence.pdf_p3_c0",
+    "text": "Formalisme : 2- Formalisme",
+    "source": "Chapitre 4 - Diagramme de séquence.pdf",
+    "page_number": 3
+  },
+  {
+    "chunk_id": "Chapitre 4 - Diagramme de séquence.pdf_p4_c0",
+    "text": "Sémantique : 3- Sémantique",
+    "source": "Chapitre 4 - Diagramme de séquence.pdf",
+    "page_number": 4
+  },
+  {
+    "chunk_id": "Chapitre 4 - Diagramme de séquence.pdf_p5_c0",
+    "text": "Exemple: 3- Sémantique",
+    "source": "Chapitre 4 - Diagramme de séquence.pdf",
+    "page_number": 5
+  },
+  {
+    "chunk_id": "Chapitre 4 - Diagramme de séquence.pdf_p6_c0",
+    "text": "Activations : 3- Activations et envois de messages: Une période d’activité correspond au temps pendant lequel un objet effectue une action. On distingue trois grandes catégories d’envois de message : 1- Flot de contrôle à plat : est utilisé pour indiquer la progression vers la prochaine étape d’une séquence → simple progression du scénario étapes qui s’enchaînent Dans un flot de contrôle à plat, l’objet n’attend pas que l’action précédente se termine. Messages :",
+    "source": "Chapitre 4 - Diagramme de séquence.pdf",
+    "page_number": 6
+  },
+  {
+    "chunk_id": "Chapitre 4 - Diagramme de séquence.pdf_p6_c1",
+    "text": "mine. Messages :",
+    "source": "Chapitre 4 - Diagramme de séquence.pdf",
+    "page_number": 6
+  },
+  {
+    "chunk_id": "Chapitre 4 - Diagramme de séquence.pdf_p7_c0",
+    "text": "3- Activations et envois de messages: Ici on a un appel de fonction dans une autre fonction. Un objet appelle un autre objet, puis il doit attendre que celui-ci termine. Messages : 2- Appel de procédure ou flot de contrôle emboîté : la séquence emboîtées doit se terminer pour que la séquence englobante reprenne le contrôle",
+    "source": "Chapitre 4 - Diagramme de séquence.pdf",
+    "page_number": 7
+  },
+  {
+    "chunk_id": "Chapitre 4 - Diagramme de séquence.pdf_p8_c0",
+    "text": "3- Activations et envois de messages: C’est le message de retour après l’exécution. Messages : 3- Retour d’un appel de procédure : le retour de message est explicite à la fin de l’exécution d’une sous-procédure et le retour éventuel de paramètres. Retour = fin de l’exécution + résultat",
+    "source": "Chapitre 4 - Diagramme de séquence.pdf",
+    "page_number": 8
+  },
+  {
+    "chunk_id": "Chapitre 4 - Diagramme de séquence.pdf_p9_c0",
+    "text": "Message synchrone et asynchrone: Message synchrone: Un message synchrone bloque l'expéditeur jusqu'à la réponse du destinataire. Le flot de contrôle passe de l'émetteur au récepteur : Si un objet A invoque une méthode d'un objet B, A reste bloqué tant que B n'a pas terminé. La représentation du message de retour est facultative, il est en fait inclus dans la fin d’exécution de l’opération déclenchée dans l’objet destinataire du message 3- Activations et envois de messages: Message asynchrone: Da",
+    "source": "Chapitre 4 - Diagramme de séquence.pdf",
+    "page_number": 9
+  },
+  {
+    "chunk_id": "Chapitre 4 - Diagramme de séquence.pdf_p9_c1",
+    "text": "ions et envois de messages: Message asynchrone: Dans ce cas, l’émetteur n’attend pas la réponse à son message, il poursuit l’éxecution de ses opérations. C’est la demi-flèche qui symbolise ce type de message. Cela décrit le comportement de l’appel (est-ce que l’objet attend ou non).",
+    "source": "Chapitre 4 - Diagramme de séquence.pdf",
+    "page_number": 9
+  },
+  {
+    "chunk_id": "Chapitre 4 - Diagramme de séquence.pdf_p10_c0",
+    "text": "Syntaxe des messages : La syntaxe des messages est : nomSignalOuOperation ( parametres ) La syntaxe des arguments est la suivante : nomParametre = valeurParametre Pour un argument modifiable : nomParametre : valeurParametre 3- Activations et envois de messages: Exemples : appeler(\"Capitaine Hadock\", 54214110) afficher(x,y) initialiser(x=100) f(x:12)",
+    "source": "Chapitre 4 - Diagramme de séquence.pdf",
+    "page_number": 10
+  },
+  {
+    "chunk_id": "Chapitre 4 - Diagramme de séquence.pdf_p11_c0",
+    "text": "Syntaxe des messages de retour : La syntaxe des messages de retour est : attributCible = nomOperation ( params ) : valeurRetour La syntaxe des paramètres est : nomParam = valeurParam Les messages de retour sont représentés en pointillés. 3- Activations et envois de messages: Utilisateur → Systeme : authentifier(login, mdp) resultat = authentifier() : true Panier → Article : getPrix() p = getPrix() : 10.5 Exemples :",
+    "source": "Chapitre 4 - Diagramme de séquence.pdf",
+    "page_number": 11
+  },
+  {
+    "chunk_id": "Chapitre 4 - Diagramme de séquence.pdf_p1_c0",
+    "text": "Chapitre IV: Représenté par : Mme Rhaiem Diagramme deséquence",
+    "source": "Chapitre 4 - Diagramme de séquence.pdf",
+    "page_number": 1
+  },
+  {
+    "chunk_id": "Chapitre 4 - Diagramme de séquence.pdf_p2_c0",
+    "text": "Description des cas d'utilisation 1- Introduction Les diagrammes de séquences permettent de décrire COMMENT les éléments du système interagissent entre eux et avec les acteurs. Les objets au cœur d'un système interagissent en s'échangeant des messages. Les acteurs interagissent avec le système au moyen d'IHM (Interfaces Homme-Machine). Les diagrammes de cas d'utilisation modélisent à QUOI sert le système, en organisant les interactions possibles avec les acteurs. Use Case = Qui ? + Fait quoi ? +",
+    "source": "Chapitre 4 - Diagramme de séquence.pdf",
+    "page_number": 2
+  },
+  {
+    "chunk_id": "Chapitre 4 - Diagramme de séquence.pdf_p2_c1",
+    "text": "avec les acteurs. Use Case = Qui ? + Fait quoi ? + Avec le système Les diagrammes de classes permettent de spécifier la structure et les liens entre les objets dont le système est composé Diagramme de classes = Classes + Attributs + Relations",
+    "source": "Chapitre 4 - Diagramme de séquence.pdf",
+    "page_number": 2
+  },
+  {
+    "chunk_id": "Chapitre 4 - Diagramme de séquence.pdf_p3_c0",
+    "text": "Formalisme : 2- Formalisme",
+    "source": "Chapitre 4 - Diagramme de séquence.pdf",
+    "page_number": 3
+  },
+  {
+    "chunk_id": "Chapitre 4 - Diagramme de séquence.pdf_p4_c0",
+    "text": "Sémantique : 3- Sémantique",
+    "source": "Chapitre 4 - Diagramme de séquence.pdf",
+    "page_number": 4
+  },
+  {
+    "chunk_id": "Chapitre 4 - Diagramme de séquence.pdf_p5_c0",
+    "text": "Exemple: 3- Sémantique",
+    "source": "Chapitre 4 - Diagramme de séquence.pdf",
+    "page_number": 5
+  },
+  {
+    "chunk_id": "Chapitre 4 - Diagramme de séquence.pdf_p6_c0",
+    "text": "Activations : 3- Activations et envois de messages: Une période d’activité correspond au temps pendant lequel un objet effectue une action. On distingue trois grandes catégories d’envois de message : 1- Flot de contrôle à plat : est utilisé pour indiquer la progression vers la prochaine étape d’une séquence → simple progression du scénario étapes qui s’enchaînent Dans un flot de contrôle à plat, l’objet n’attend pas que l’action précédente se termine. Messages :",
+    "source": "Chapitre 4 - Diagramme de séquence.pdf",
+    "page_number": 6
+  },
+  {
+    "chunk_id": "Chapitre 4 - Diagramme de séquence.pdf_p6_c1",
+    "text": "mine. Messages :",
+    "source": "Chapitre 4 - Diagramme de séquence.pdf",
+    "page_number": 6
+  },
+  {
+    "chunk_id": "Chapitre 4 - Diagramme de séquence.pdf_p7_c0",
+    "text": "3- Activations et envois de messages: Ici on a un appel de fonction dans une autre fonction. Un objet appelle un autre objet, puis il doit attendre que celui-ci termine. Messages : 2- Appel de procédure ou flot de contrôle emboîté : la séquence emboîtées doit se terminer pour que la séquence englobante reprenne le contrôle",
+    "source": "Chapitre 4 - Diagramme de séquence.pdf",
+    "page_number": 7
+  },
+  {
+    "chunk_id": "Chapitre 4 - Diagramme de séquence.pdf_p8_c0",
+    "text": "3- Activations et envois de messages: C’est le message de retour après l’exécution. Messages : 3- Retour d’un appel de procédure : le retour de message est explicite à la fin de l’exécution d’une sous-procédure et le retour éventuel de paramètres. Retour = fin de l’exécution + résultat",
+    "source": "Chapitre 4 - Diagramme de séquence.pdf",
+    "page_number": 8
+  },
+  {
+    "chunk_id": "Chapitre 4 - Diagramme de séquence.pdf_p9_c0",
+    "text": "Message synchrone et asynchrone: Message synchrone: Un message synchrone bloque l'expéditeur jusqu'à la réponse du destinataire. Le flot de contrôle passe de l'émetteur au récepteur : Si un objet A invoque une méthode d'un objet B, A reste bloqué tant que B n'a pas terminé. La représentation du message de retour est facultative, il est en fait inclus dans la fin d’exécution de l’opération déclenchée dans l’objet destinataire du message 3- Activations et envois de messages: Message asynchrone: Da",
+    "source": "Chapitre 4 - Diagramme de séquence.pdf",
+    "page_number": 9
+  },
+  {
+    "chunk_id": "Chapitre 4 - Diagramme de séquence.pdf_p9_c1",
+    "text": "ions et envois de messages: Message asynchrone: Dans ce cas, l’émetteur n’attend pas la réponse à son message, il poursuit l’éxecution de ses opérations. C’est la demi-flèche qui symbolise ce type de message. Cela décrit le comportement de l’appel (est-ce que l’objet attend ou non).",
+    "source": "Chapitre 4 - Diagramme de séquence.pdf",
+    "page_number": 9
+  },
+  {
+    "chunk_id": "Chapitre 4 - Diagramme de séquence.pdf_p10_c0",
+    "text": "Syntaxe des messages : La syntaxe des messages est : nomSignalOuOperation ( parametres ) La syntaxe des arguments est la suivante : nomParametre = valeurParametre Pour un argument modifiable : nomParametre : valeurParametre 3- Activations et envois de messages: Exemples : appeler(\"Capitaine Hadock\", 54214110) afficher(x,y) initialiser(x=100) f(x:12)",
+    "source": "Chapitre 4 - Diagramme de séquence.pdf",
+    "page_number": 10
+  },
+  {
+    "chunk_id": "Chapitre 4 - Diagramme de séquence.pdf_p11_c0",
+    "text": "Syntaxe des messages de retour : La syntaxe des messages de retour est : attributCible = nomOperation ( params ) : valeurRetour La syntaxe des paramètres est : nomParam = valeurParam Les messages de retour sont représentés en pointillés. 3- Activations et envois de messages: Utilisateur → Systeme : authentifier(login, mdp) resultat = authentifier() : true Panier → Article : getPrix() p = getPrix() : 10.5 Exemples :",
+    "source": "Chapitre 4 - Diagramme de séquence.pdf",
+    "page_number": 11
+  },
+  {
+    "chunk_id": "Cours_modélisation 1.pdf_p1_c0",
+    "text": "Introduction à la modélisation mathématique par des lois physiques Diffusion thermique et Convection-Diffusion Cours de Modélisation Département de Mathématiques Appliquées 28 janvier 2026 Cours de Modélisation (Département de Mathématiques Appliquées)Modélisation Mathématique 28 janvier 2026 1/21",
+    "source": "Cours_modélisation 1.pdf",
+    "page_number": 1
+  },
+  {
+    "chunk_id": "Cours_modélisation 1.pdf_p2_c0",
+    "text": "Sommaire 1 Introduction à la démarche de modélisation 2 Modélisation d’un phénomène de diffusion 3 Conditions aux limites 4 Étude de cas : Préchauffage industriel 5 Modélisation : Convection-Diffusion Cours de Modélisation (Département de Mathématiques Appliquées)Modélisation Mathématique 28 janvier 2026 2/21",
+    "source": "Cours_modélisation 1.pdf",
+    "page_number": 2
+  },
+  {
+    "chunk_id": "Cours_modélisation 1.pdf_p3_c0",
+    "text": "Les trois étapes de ma modélisation mathématique 1 Passage du prob réél au modéle mathémathique 2 Analyse du modèle 3 Simulation Cours de Modélisation (Département de Mathématiques Appliquées)Modélisation Mathématique 28 janvier 2026 3/21",
+    "source": "Cours_modélisation 1.pdf",
+    "page_number": 3
+  },
+  {
+    "chunk_id": "Cours_modélisation 1.pdf_p4_c0",
+    "text": "Domaines d’applications Ingénierie (calcul des structures, énergie) Finance Automates ... Cours de Modélisation (Département de Mathématiques Appliquées)Modélisation Mathématique 28 janvier 2026 4/21",
+    "source": "Cours_modélisation 1.pdf",
+    "page_number": 4
+  },
+  {
+    "chunk_id": "Cours_modélisation 1.pdf_p5_c0",
+    "text": "Objectifs du cours Objectif 1 Acquérir les outils mathématiques nécessaires pour comprendre et résoudre des problèmes. Objectif 2 Aborder des problèmes issus de la physique, de la mécanique et de la finance. Objectif 3 Présenter des simulations numériques de ces problèmes. Cours de Modélisation (Département de Mathématiques Appliquées)Modélisation Mathématique 28 janvier 2026 5/21",
+    "source": "Cours_modélisation 1.pdf",
+    "page_number": 5
+  },
+  {
+    "chunk_id": "Cours_modélisation 1.pdf_p6_c0",
+    "text": "Qu’est-ce que la modélisation mathématique? Définition La modélisation consiste à traduire des phénomènes réels en équations pour décrire, analyser et prévoir le comportement d’un système. Le cadre mathématique : Utilisation desÉquations aux Dérivées Partielles (EDP). Relation entre variables spatiales (x,y,z) et temporelles (t). Exemples : Diffusion de chaleur, mécanique des fluides, ondes. Cours de Modélisation (Département de Mathématiques Appliquées)Modélisation Mathématique 28 janvier 2026 ",
+    "source": "Cours_modélisation 1.pdf",
+    "page_number": 6
+  },
+  {
+    "chunk_id": "Cours_modélisation 1.pdf_p6_c1",
+    "text": "liquées)Modélisation Mathématique 28 janvier 2026 6/21",
+    "source": "Cours_modélisation 1.pdf",
+    "page_number": 6
+  },
+  {
+    "chunk_id": "Cours_modélisation 1.pdf_p7_c0",
+    "text": "Les piliers de la modélisation Construire un modèle demande rigueur et intuition. Les 3 étapes clés 1 Hypothèses simplificatrices :Isoler le phénomène dominant (ex : négliger la viscosité, supposé homogène). 2 Lois de conservation :Principes universels (Masse, Énergie, Quantité de mouvement). 3 Lois de comportement :Spécifiques au matériau (Loi de Fourier, Loi de Hooke...). Cours de Modélisation (Département de Mathématiques Appliquées)Modélisation Mathématique 28 janvier 2026 7/21",
+    "source": "Cours_modélisation 1.pdf",
+    "page_number": 7
+  },
+  {
+    "chunk_id": "Cours_modélisation 1.pdf_p7_c1",
+    "text": "on Mathématique 28 janvier 2026 7/21",
+    "source": "Cours_modélisation 1.pdf",
+    "page_number": 7
+  },
+  {
+    "chunk_id": "Cours_modélisation 1.pdf_p8_c0",
+    "text": "Le cadre de l’étude : Diffusion thermique Soit un domaineΩoccupé par un matériau caractérisé par : ρ: masse volumique (kg·m−3) cp : capacité calorifique (J·kg−1·K−1) k: conductivité thermique (W·m−1·K−1) Objectif :Trouver le champ de températureθ(x,t). Méthode : Bilan d’énergie + Loi de Fourier Cours de Modélisation (Département de Mathématiques Appliquées)Modélisation Mathématique 28 janvier 2026 8/21",
+    "source": "Cours_modélisation 1.pdf",
+    "page_number": 8
+  },
+  {
+    "chunk_id": "Cours_modélisation 1.pdf_p9_c0",
+    "text": "Étape 1 : Principe de conservation de l’énergie Isolons un volume de contrôleV. La variation d’énergie interne est égale à la production interne moins le flux sortant. Bilan intégral d dt ∫ V ρcpθdx= ∫ V f dx− ∫ ∂V q·nds(1) Application duThéorème de Green-Ostrogradski (Divergence)pour transformer le terme surfacique en volumique : ∫ ∂V q·nds= ∫ V div(q)dx Forme locale (Conservation) L’égalité étant vraie pour tout volumeV, on a ponctuellement : ρcp ∂θ ∂t+div(q) =f(2) Cours de Modélisation (Dépar",
+    "source": "Cours_modélisation 1.pdf",
+    "page_number": 9
+  },
+  {
+    "chunk_id": "Cours_modélisation 1.pdf_p9_c1",
+    "text": "cp ∂θ ∂t+div(q) =f(2) Cours de Modélisation (Département de Mathématiques Appliquées)Modélisation Mathématique 28 janvier 2026 9/21",
+    "source": "Cours_modélisation 1.pdf",
+    "page_number": 9
+  },
+  {
+    "chunk_id": "Cours_modélisation 1.pdf_p10_c0",
+    "text": "Étape 1 : Principe de conservation de l’énergie Isolons un volume de contrôleV. La variation d’énergie interne est égale à la production interne moins le flux sortant. Bilan intégral d dt ∫ V ρcpθdx= ∫ V f dx− ∫ ∂V q·nds(1) Application duThéorème de Green-Ostrogradski (Divergence)pour transformer le terme surfacique en volumique : ∫ ∂V q·nds= ∫ V div(q)dx Forme locale (Conservation) L’égalité étant vraie pour tout volumeV, on a ponctuellement : ρcp ∂θ ∂t+div(q) =f(2) Cours de Modélisation (Dépar",
+    "source": "Cours_modélisation 1.pdf",
+    "page_number": 10
+  },
+  {
+    "chunk_id": "Cours_modélisation 1.pdf_p10_c1",
+    "text": "cp ∂θ ∂t+div(q) =f(2) Cours de Modélisation (Département de Mathématiques Appliquées)Modélisation Mathématique 28 janvier 2026 9/21",
+    "source": "Cours_modélisation 1.pdf",
+    "page_number": 10
+  },
+  {
+    "chunk_id": "Cours_modélisation 1.pdf_p11_c0",
+    "text": "Étape 1 : Principe de conservation de l’énergie Isolons un volume de contrôleV. La variation d’énergie interne est égale à la production interne moins le flux sortant. Bilan intégral d dt ∫ V ρcpθdx= ∫ V f dx− ∫ ∂V q·nds(1) Application duThéorème de Green-Ostrogradski (Divergence)pour transformer le terme surfacique en volumique : ∫ ∂V q·nds= ∫ V div(q)dx Forme locale (Conservation) L’égalité étant vraie pour tout volumeV, on a ponctuellement : ρcp ∂θ ∂t+div(q) =f(2) Cours de Modélisation (Dépar",
+    "source": "Cours_modélisation 1.pdf",
+    "page_number": 11
+  },
+  {
+    "chunk_id": "Cours_modélisation 1.pdf_p11_c1",
+    "text": "cp ∂θ ∂t+div(q) =f(2) Cours de Modélisation (Département de Mathématiques Appliquées)Modélisation Mathématique 28 janvier 2026 9/21",
+    "source": "Cours_modélisation 1.pdf",
+    "page_number": 11
+  },
+  {
+    "chunk_id": "Cours_modélisation 1.pdf_p12_c0",
+    "text": "Étape 2 : Loi de comportement (Fourier) Pour fermer le système, il faut relier le fluxqà la températureθ. Loi de Fourier La chaleur s’écoule des zones chaudes vers les zones froides : q=−k∇θ(3) ∇θ: Gradient de température (vecteur pointant vers le chaud). Le signe(−)assure la dissipation (Second principe de la thermo). Cours de Modélisation (Département de Mathématiques Appliquées)Modélisation Mathématique 28 janvier 2026 10/21",
+    "source": "Cours_modélisation 1.pdf",
+    "page_number": 12
+  },
+  {
+    "chunk_id": "Cours_modélisation 1.pdf_p13_c0",
+    "text": "Synthèse : L’Équation de la Chaleur En injectant Fourier dans l’équation de conservation : ρcp ∂θ ∂t+div(−k∇θ) =f Si le milieu est homogène (kconstant), alorsdiv(∇θ) = ∆θ(Laplacien). Équation aux Dérivées Partielles (EDP) ρcp ∂θ ∂t−k∆θ=f(4) Interprétation mathématique : ∂tθ: Terme d’évolution (Inertie). ∆θ: Terme de lissage spatial (Diffusion). Cours de Modélisation (Département de Mathématiques Appliquées)Modélisation Mathématique 28 janvier 2026 11/21",
+    "source": "Cours_modélisation 1.pdf",
+    "page_number": 13
+  },
+  {
+    "chunk_id": "Cours_modélisation 1.pdf_p13_c1",
+    "text": "6 11/21",
+    "source": "Cours_modélisation 1.pdf",
+    "page_number": 13
+  },
+  {
+    "chunk_id": "Cours_modélisation 1.pdf_p14_c0",
+    "text": "L’environnement du système : Conditions aux limites Une EDP nécessite des conditions aux bords (∂Ω) pour avoir une solution unique. 1 Condition de Dirichlet (Température imposée) θ(x,t) =θbord sur∂Ω Exemple : Pièce en contact avec de la glace fondante. 2 Condition de Neumann (Flux imposé) ∂θ ∂n=ϕ(souventϕ=0 pour isolation) 3 Condition de Robin (Échange convectif) −k∂θ ∂n=h(θ−θext) Exemple : Refroidissement par l’air ambiant. Cours de Modélisation (Département de Mathématiques Appliquées)Modélisa",
+    "source": "Cours_modélisation 1.pdf",
+    "page_number": 14
+  },
+  {
+    "chunk_id": "Cours_modélisation 1.pdf_p14_c1",
+    "text": " (Département de Mathématiques Appliquées)Modélisation Mathématique 28 janvier 2026 12/21",
+    "source": "Cours_modélisation 1.pdf",
+    "page_number": 14
+  },
+  {
+    "chunk_id": "Cours_modélisation 1.pdf_p15_c0",
+    "text": "Étude de cas : Préchauffage de plaque Problème :Une plaque d’acier rectangulaireΩchauffée localement par induction. Modèle mathématique complet :    ρcp ∂θ ∂t−k∆θ=S(x,y)dansΩ θ(t=0) =295KCI θ=723KBords latéraux ∂θ ∂n=0 Haut/Bas θ=723 K ∂nθ=0 SourceS Cours de Modélisation (Département de Mathématiques Appliquées)Modélisation Mathématique 28 janvier 2026 13/21",
+    "source": "Cours_modélisation 1.pdf",
+    "page_number": 15
+  },
+  {
+    "chunk_id": "Cours_modélisation 1.pdf_p16_c0",
+    "text": "Visualisation de la solution Simulation de l’évolution temporelle (t1 <t 2 <t 3). t1 (Initial) Inertie dominante Flux t2 (Transitoire) Diffusion active (∆θ) t3 (Stationnaire) Équilibre atteint Cours de Modélisation (Département de Mathématiques Appliquées)Modélisation Mathématique 28 janvier 2026 14/21",
+    "source": "Cours_modélisation 1.pdf",
+    "page_number": 16
+  },
+  {
+    "chunk_id": "Cours_modélisation 1.pdf_p17_c0",
+    "text": "1. Construction des Flux : Compétition Physique Dans un fluide en mouvement (vitesse⃗V(x,t)), le transport de l’énergie (températureθ) résulte de deux mécanismes concurrents. 1. Le Flux Diffusif⃗Jdiff (Loi de Fourier) Transport microscopique dû à l’agitation thermique. Tendance à l’homogénéisation isotrope. ⃗Jdiff =−k∇θ 2. Le Flux Convectif⃗Jconv (Transport) Transport macroscopique. L’énergie interne est emportée par le mouvement du fluide lui-même. ⃗Jconv = (ρcpθ)⃗V Flux Total :⃗J= ⃗Jdiff +⃗Jco",
+    "source": "Cours_modélisation 1.pdf",
+    "page_number": 17
+  },
+  {
+    "chunk_id": "Cours_modélisation 1.pdf_p17_c1",
+    "text": "me. ⃗Jconv = (ρcpθ)⃗V Flux Total :⃗J= ⃗Jdiff +⃗Jconv =−k∇θ+ρcpθ⃗V Cours de Modélisation (Département de Mathématiques Appliquées)Modélisation Mathématique 28 janvier 2026 15/21",
+    "source": "Cours_modélisation 1.pdf",
+    "page_number": 17
+  },
+  {
+    "chunk_id": "Cours_modélisation 1.pdf_p18_c0",
+    "text": "1. Construction des Flux : Compétition Physique Dans un fluide en mouvement (vitesse⃗V(x,t)), le transport de l’énergie (températureθ) résulte de deux mécanismes concurrents. 1. Le Flux Diffusif⃗Jdiff (Loi de Fourier) Transport microscopique dû à l’agitation thermique. Tendance à l’homogénéisation isotrope. ⃗Jdiff =−k∇θ 2. Le Flux Convectif⃗Jconv (Transport) Transport macroscopique. L’énergie interne est emportée par le mouvement du fluide lui-même. ⃗Jconv = (ρcpθ)⃗V Flux Total :⃗J= ⃗Jdiff +⃗Jco",
+    "source": "Cours_modélisation 1.pdf",
+    "page_number": 18
+  },
+  {
+    "chunk_id": "Cours_modélisation 1.pdf_p18_c1",
+    "text": "me. ⃗Jconv = (ρcpθ)⃗V Flux Total :⃗J= ⃗Jdiff +⃗Jconv =−k∇θ+ρcpθ⃗V Cours de Modélisation (Département de Mathématiques Appliquées)Modélisation Mathématique 28 janvier 2026 15/21",
+    "source": "Cours_modélisation 1.pdf",
+    "page_number": 18
+  },
+  {
+    "chunk_id": "Cours_modélisation 1.pdf_p19_c0",
+    "text": "2. De la Conservation à l’EDP (Dérivation) Partons de l’équation conservative générale : ρcp ∂θ ∂t+div(⃗Jtotal) =f Développement du terme convectifdiv(ρcpθ⃗V): On supposeρcp constants. Identité vectorielle :div(θ⃗V) = ⃗V·∇θ+θ(∇·⃗V) Hypothèse de modélisation : Fluide Incompressible Pour des liquides (eau) ou gaz à faible vitesse (Mach<0.3), la densité est constante, donc le champ de vitesse est à divergence nulle : div(⃗V) =∇·⃗V=0 Le terme de convection se simplifie alors en un pur terme de trans",
+    "source": "Cours_modélisation 1.pdf",
+    "page_number": 19
+  },
+  {
+    "chunk_id": "Cours_modélisation 1.pdf_p19_c1",
+    "text": "ection se simplifie alors en un pur terme de transport : div(ρcpθ⃗V) =ρcp(⃗V·∇θ) Cours de Modélisation (Département de Mathématiques Appliquées)Modélisation Mathématique 28 janvier 2026 16/21",
+    "source": "Cours_modélisation 1.pdf",
+    "page_number": 19
+  },
+  {
+    "chunk_id": "Cours_modélisation 1.pdf_p20_c0",
+    "text": "2. De la Conservation à l’EDP (Dérivation) Partons de l’équation conservative générale : ρcp ∂θ ∂t+div(⃗Jtotal) =f Développement du terme convectifdiv(ρcpθ⃗V): On supposeρcp constants. Identité vectorielle :div(θ⃗V) = ⃗V·∇θ+θ(∇·⃗V) Hypothèse de modélisation : Fluide Incompressible Pour des liquides (eau) ou gaz à faible vitesse (Mach<0.3), la densité est constante, donc le champ de vitesse est à divergence nulle : div(⃗V) =∇·⃗V=0 Le terme de convection se simplifie alors en un pur terme de trans",
+    "source": "Cours_modélisation 1.pdf",
+    "page_number": 20
+  },
+  {
+    "chunk_id": "Cours_modélisation 1.pdf_p20_c1",
+    "text": "ection se simplifie alors en un pur terme de transport : div(ρcpθ⃗V) =ρcp(⃗V·∇θ) Cours de Modélisation (Département de Mathématiques Appliquées)Modélisation Mathématique 28 janvier 2026 16/21",
+    "source": "Cours_modélisation 1.pdf",
+    "page_number": 20
+  },
+  {
+    "chunk_id": "Cours_modélisation 1.pdf_p21_c0",
+    "text": "2. De la Conservation à l’EDP (Dérivation) Partons de l’équation conservative générale : ρcp ∂θ ∂t+div(⃗Jtotal) =f Développement du terme convectifdiv(ρcpθ⃗V): On supposeρcp constants. Identité vectorielle :div(θ⃗V) = ⃗V·∇θ+θ(∇·⃗V) Hypothèse de modélisation : Fluide Incompressible Pour des liquides (eau) ou gaz à faible vitesse (Mach<0.3), la densité est constante, donc le champ de vitesse est à divergence nulle : div(⃗V) =∇·⃗V=0 Le terme de convection se simplifie alors en un pur terme de trans",
+    "source": "Cours_modélisation 1.pdf",
+    "page_number": 21
+  },
+  {
+    "chunk_id": "Cours_modélisation 1.pdf_p21_c1",
+    "text": "ection se simplifie alors en un pur terme de transport : div(ρcpθ⃗V) =ρcp(⃗V·∇θ) Cours de Modélisation (Département de Mathématiques Appliquées)Modélisation Mathématique 28 janvier 2026 16/21",
+    "source": "Cours_modélisation 1.pdf",
+    "page_number": 21
+  },
+  {
+    "chunk_id": "Cours_modélisation 1.pdf_p22_c0",
+    "text": "3. L’équation de Convection-Diffusion En réinjectant le résultat précédent, on obtient : ρcp (∂θ ∂t+⃗V·∇θ ) =div(k∇θ) +f Forme finale (avec diffusivitéα=k ρcp ) ∂θ ∂t+⃗V·∇θ−α∆θ=S(5) Interprétation Lagrangienne (Suivi de particule) :Le terme de gauche correspond à laDérivée Particulaire(ou Matérielle) Dθ Dt : Dθ Dt =α∆θ+S \"Pour un observateur porté par le fluide, la variation de température est uniquement due à la diffusion et aux sources.\" Cours de Modélisation (Département de Mathématiques Appl",
+    "source": "Cours_modélisation 1.pdf",
+    "page_number": 22
+  },
+  {
+    "chunk_id": "Cours_modélisation 1.pdf_p22_c1",
+    "text": "de Modélisation (Département de Mathématiques Appliquées)Modélisation Mathématique 28 janvier 2026 17/21",
+    "source": "Cours_modélisation 1.pdf",
+    "page_number": 22
+  },
+  {
+    "chunk_id": "Cours_modélisation 1.pdf_p23_c0",
+    "text": "4. Analyse Adimensionnelle : Le nombre de Péclet Pour comprendre le régime dominant, on adimensionne l’équation. SoitLune longueur caractéristique etUune vitesse caractéristique. Posons :x ∗ =x/L, t ∗ =t/(L/U), ⃗V ∗ = ⃗V/U. L’opérateur gradient devient∇=1 L∇∗ et ∂ ∂t= U L ∂ ∂t∗. L’équation homogène (S=0) devient : U L ∂θ ∂t∗ + U L ⃗V ∗·∇∗θ=α L2 ∆ ∗θ En multipliant parL U, on fait apparaître le nombre sans dimension : Équation adimensionnée ∂θ ∂t∗ +⃗V ∗·∇∗θ=1 Pe ∆ ∗θavecPe= UL α Pe≪1 : Diffusion ",
+    "source": "Cours_modélisation 1.pdf",
+    "page_number": 23
+  },
+  {
+    "chunk_id": "Cours_modélisation 1.pdf_p23_c1",
+    "text": " +⃗V ∗·∇∗θ=1 Pe ∆ ∗θavecPe= UL α Pe≪1 : Diffusion dominante (Éq. Parabolique). Pe≫1 : Convection dominante (Éq. Hyperbolique du premier ordre). Cours de Modélisation (Département de Mathématiques Appliquées)Modélisation Mathématique 28 janvier 2026 18/21",
+    "source": "Cours_modélisation 1.pdf",
+    "page_number": 23
+  },
+  {
+    "chunk_id": "Cours_modélisation 1.pdf_p24_c0",
+    "text": "4. Analyse Adimensionnelle : Le nombre de Péclet Pour comprendre le régime dominant, on adimensionne l’équation. SoitLune longueur caractéristique etUune vitesse caractéristique. Posons :x ∗ =x/L, t ∗ =t/(L/U), ⃗V ∗ = ⃗V/U. L’opérateur gradient devient∇=1 L∇∗ et ∂ ∂t= U L ∂ ∂t∗. L’équation homogène (S=0) devient : U L ∂θ ∂t∗ + U L ⃗V ∗·∇∗θ=α L2 ∆ ∗θ En multipliant parL U, on fait apparaître le nombre sans dimension : Équation adimensionnée ∂θ ∂t∗ +⃗V ∗·∇∗θ=1 Pe ∆ ∗θavecPe= UL α Pe≪1 : Diffusion ",
+    "source": "Cours_modélisation 1.pdf",
+    "page_number": 24
+  },
+  {
+    "chunk_id": "Cours_modélisation 1.pdf_p24_c1",
+    "text": " +⃗V ∗·∇∗θ=1 Pe ∆ ∗θavecPe= UL α Pe≪1 : Diffusion dominante (Éq. Parabolique). Pe≫1 : Convection dominante (Éq. Hyperbolique du premier ordre). Cours de Modélisation (Département de Mathématiques Appliquées)Modélisation Mathématique 28 janvier 2026 18/21",
+    "source": "Cours_modélisation 1.pdf",
+    "page_number": 24
+  },
+  {
+    "chunk_id": "Cours_modélisation 1.pdf_p25_c0",
+    "text": "Exemple : Pollution thermique en rivière (1D) Évolution d’un rejet thermique initial (Gaussienne) dans un écoulement uniforme V. x θ(x,t) Vitesse⃗V t=0 Source Transport (V∂xθ) t1 Diffusion (−α∂xxθ) t2 Le centre de masse se déplace à vitesseV. La variance (largeur) augmente linéairement avec le temps (2αt) à cause de la diffusion. Cours de Modélisation (Département de Mathématiques Appliquées)Modélisation Mathématique 28 janvier 2026 19/21",
+    "source": "Cours_modélisation 1.pdf",
+    "page_number": 25
+  },
+  {
+    "chunk_id": "Cours_modélisation 1.pdf_p26_c0",
+    "text": "Application : pollution fluviale Scénario Rivière :V=1 m/s,L=100 m Rejet polluant ponctuel Diffusion moléculaire :α=10−9 m2/s Pe= VL α = 1×100 10−9 =10 11≫1 Interprétation La convection domine totalement. Le panache reste compact, peu d’étalement. Source L=100 m V=1 m/s Remarque En réalité, la turbulence augmente la diffusion effective (αturb≈10−1 m2/s), donnantPe≈103. Cours de Modélisation (Département de Mathématiques Appliquées)Modélisation Mathématique 28 janvier 2026 20/21",
+    "source": "Cours_modélisation 1.pdf",
+    "page_number": 26
+  },
+  {
+    "chunk_id": "Cours_modélisation 1.pdf_p26_c1",
+    "text": "thématique 28 janvier 2026 20/21",
+    "source": "Cours_modélisation 1.pdf",
+    "page_number": 26
+  },
+  {
+    "chunk_id": "Cours_modélisation 1.pdf_p27_c0",
+    "text": "Conclusion 1 La modélisation mathématique couple des lois universelles (Conservation) et des lois empiriques (Comportement). 2 L’analyse mathématique (termes de l’EDP, conditions aux limites) donne le sens physique. 3 L’analyse adimensionnelle (Pe) permet de prévoir la physique avant de lancer le moindre calcul. Prochaine étape :Discrétisation et résolution numérique. Cours de Modélisation (Département de Mathématiques Appliquées)Modélisation Mathématique 28 janvier 2026 21/21",
+    "source": "Cours_modélisation 1.pdf",
+    "page_number": 27
+  },
+  {
+    "chunk_id": "Cours_modélisation 1.pdf_p27_c1",
+    "text": "hématique 28 janvier 2026 21/21",
+    "source": "Cours_modélisation 1.pdf",
+    "page_number": 27
+  },
+  {
+    "chunk_id": "Chapitre 4 - Diagramme de séquence.pdf_p1_c0",
+    "text": "Chapitre IV: Représenté par : Mme Rhaiem Diagramme deséquence",
+    "source": "Chapitre 4 - Diagramme de séquence.pdf",
+    "page_number": 1
+  },
+  {
+    "chunk_id": "Chapitre 4 - Diagramme de séquence.pdf_p2_c0",
+    "text": "Description des cas d'utilisation 1- Introduction Les diagrammes de séquences permettent de décrire COMMENT les éléments du système interagissent entre eux et avec les acteurs. Les objets au cœur d'un système interagissent en s'échangeant des messages. Les acteurs interagissent avec le système au moyen d'IHM (Interfaces Homme-Machine). Les diagrammes de cas d'utilisation modélisent à QUOI sert le système, en organisant les interactions possibles avec les acteurs. Use Case = Qui ? + Fait quoi ? +",
+    "source": "Chapitre 4 - Diagramme de séquence.pdf",
+    "page_number": 2
+  },
+  {
+    "chunk_id": "Chapitre 4 - Diagramme de séquence.pdf_p2_c1",
+    "text": "avec les acteurs. Use Case = Qui ? + Fait quoi ? + Avec le système Les diagrammes de classes permettent de spécifier la structure et les liens entre les objets dont le système est composé Diagramme de classes = Classes + Attributs + Relations",
+    "source": "Chapitre 4 - Diagramme de séquence.pdf",
+    "page_number": 2
+  },
+  {
+    "chunk_id": "Chapitre 4 - Diagramme de séquence.pdf_p3_c0",
+    "text": "Formalisme : 2- Formalisme",
+    "source": "Chapitre 4 - Diagramme de séquence.pdf",
+    "page_number": 3
+  },
+  {
+    "chunk_id": "Chapitre 4 - Diagramme de séquence.pdf_p4_c0",
+    "text": "Sémantique : 3- Sémantique",
+    "source": "Chapitre 4 - Diagramme de séquence.pdf",
+    "page_number": 4
+  },
+  {
+    "chunk_id": "Chapitre 4 - Diagramme de séquence.pdf_p5_c0",
+    "text": "Exemple: 3- Sémantique",
+    "source": "Chapitre 4 - Diagramme de séquence.pdf",
+    "page_number": 5
+  },
+  {
+    "chunk_id": "Chapitre 4 - Diagramme de séquence.pdf_p6_c0",
+    "text": "Activations : 3- Activations et envois de messages: Une période d’activité correspond au temps pendant lequel un objet effectue une action. On distingue trois grandes catégories d’envois de message : 1- Flot de contrôle à plat : est utilisé pour indiquer la progression vers la prochaine étape d’une séquence → simple progression du scénario étapes qui s’enchaînent Dans un flot de contrôle à plat, l’objet n’attend pas que l’action précédente se termine. Messages :",
+    "source": "Chapitre 4 - Diagramme de séquence.pdf",
+    "page_number": 6
+  },
+  {
+    "chunk_id": "Chapitre 4 - Diagramme de séquence.pdf_p6_c1",
+    "text": "mine. Messages :",
+    "source": "Chapitre 4 - Diagramme de séquence.pdf",
+    "page_number": 6
+  },
+  {
+    "chunk_id": "Chapitre 4 - Diagramme de séquence.pdf_p7_c0",
+    "text": "3- Activations et envois de messages: Ici on a un appel de fonction dans une autre fonction. Un objet appelle un autre objet, puis il doit attendre que celui-ci termine. Messages : 2- Appel de procédure ou flot de contrôle emboîté : la séquence emboîtées doit se terminer pour que la séquence englobante reprenne le contrôle",
+    "source": "Chapitre 4 - Diagramme de séquence.pdf",
+    "page_number": 7
+  },
+  {
+    "chunk_id": "Chapitre 4 - Diagramme de séquence.pdf_p8_c0",
+    "text": "3- Activations et envois de messages: C’est le message de retour après l’exécution. Messages : 3- Retour d’un appel de procédure : le retour de message est explicite à la fin de l’exécution d’une sous-procédure et le retour éventuel de paramètres. Retour = fin de l’exécution + résultat",
+    "source": "Chapitre 4 - Diagramme de séquence.pdf",
+    "page_number": 8
+  },
+  {
+    "chunk_id": "Chapitre 4 - Diagramme de séquence.pdf_p9_c0",
+    "text": "Message synchrone et asynchrone: Message synchrone: Un message synchrone bloque l'expéditeur jusqu'à la réponse du destinataire. Le flot de contrôle passe de l'émetteur au récepteur : Si un objet A invoque une méthode d'un objet B, A reste bloqué tant que B n'a pas terminé. La représentation du message de retour est facultative, il est en fait inclus dans la fin d’exécution de l’opération déclenchée dans l’objet destinataire du message 3- Activations et envois de messages: Message asynchrone: Da",
+    "source": "Chapitre 4 - Diagramme de séquence.pdf",
+    "page_number": 9
+  },
+  {
+    "chunk_id": "Chapitre 4 - Diagramme de séquence.pdf_p9_c1",
+    "text": "ions et envois de messages: Message asynchrone: Dans ce cas, l’émetteur n’attend pas la réponse à son message, il poursuit l’éxecution de ses opérations. C’est la demi-flèche qui symbolise ce type de message. Cela décrit le comportement de l’appel (est-ce que l’objet attend ou non).",
+    "source": "Chapitre 4 - Diagramme de séquence.pdf",
+    "page_number": 9
+  },
+  {
+    "chunk_id": "Chapitre 4 - Diagramme de séquence.pdf_p10_c0",
+    "text": "Syntaxe des messages : La syntaxe des messages est : nomSignalOuOperation ( parametres ) La syntaxe des arguments est la suivante : nomParametre = valeurParametre Pour un argument modifiable : nomParametre : valeurParametre 3- Activations et envois de messages: Exemples : appeler(\"Capitaine Hadock\", 54214110) afficher(x,y) initialiser(x=100) f(x:12)",
+    "source": "Chapitre 4 - Diagramme de séquence.pdf",
+    "page_number": 10
+  },
+  {
+    "chunk_id": "Chapitre 4 - Diagramme de séquence.pdf_p11_c0",
+    "text": "Syntaxe des messages de retour : La syntaxe des messages de retour est : attributCible = nomOperation ( params ) : valeurRetour La syntaxe des paramètres est : nomParam = valeurParam Les messages de retour sont représentés en pointillés. 3- Activations et envois de messages: Utilisateur → Systeme : authentifier(login, mdp) resultat = authentifier() : true Panier → Article : getPrix() p = getPrix() : 10.5 Exemples :",
+    "source": "Chapitre 4 - Diagramme de séquence.pdf",
+    "page_number": 11
+  },
+  {
+    "chunk_id": "Chapitre 4 - Diagramme de séquence.pdf_p1_c0",
+    "text": "Chapitre IV: Représenté par : Mme Rhaiem Diagramme deséquence",
+    "source": "Chapitre 4 - Diagramme de séquence.pdf",
+    "page_number": 1
+  },
+  {
+    "chunk_id": "Chapitre 4 - Diagramme de séquence.pdf_p2_c0",
+    "text": "Description des cas d'utilisation 1- Introduction Les diagrammes de séquences permettent de décrire COMMENT les éléments du système interagissent entre eux et avec les acteurs. Les objets au cœur d'un système interagissent en s'échangeant des messages. Les acteurs interagissent avec le système au moyen d'IHM (Interfaces Homme-Machine). Les diagrammes de cas d'utilisation modélisent à QUOI sert le système, en organisant les interactions possibles avec les acteurs. Use Case = Qui ? + Fait quoi ? +",
+    "source": "Chapitre 4 - Diagramme de séquence.pdf",
+    "page_number": 2
+  },
+  {
+    "chunk_id": "Chapitre 4 - Diagramme de séquence.pdf_p2_c1",
+    "text": "avec les acteurs. Use Case = Qui ? + Fait quoi ? + Avec le système Les diagrammes de classes permettent de spécifier la structure et les liens entre les objets dont le système est composé Diagramme de classes = Classes + Attributs + Relations",
+    "source": "Chapitre 4 - Diagramme de séquence.pdf",
+    "page_number": 2
+  },
+  {
+    "chunk_id": "Chapitre 4 - Diagramme de séquence.pdf_p3_c0",
+    "text": "Formalisme : 2- Formalisme",
+    "source": "Chapitre 4 - Diagramme de séquence.pdf",
+    "page_number": 3
+  },
+  {
+    "chunk_id": "Chapitre 4 - Diagramme de séquence.pdf_p4_c0",
+    "text": "Sémantique : 3- Sémantique",
+    "source": "Chapitre 4 - Diagramme de séquence.pdf",
+    "page_number": 4
+  },
+  {
+    "chunk_id": "Chapitre 4 - Diagramme de séquence.pdf_p5_c0",
+    "text": "Exemple: 3- Sémantique",
+    "source": "Chapitre 4 - Diagramme de séquence.pdf",
+    "page_number": 5
+  },
+  {
+    "chunk_id": "Chapitre 4 - Diagramme de séquence.pdf_p6_c0",
+    "text": "Activations : 3- Activations et envois de messages: Une période d’activité correspond au temps pendant lequel un objet effectue une action. On distingue trois grandes catégories d’envois de message : 1- Flot de contrôle à plat : est utilisé pour indiquer la progression vers la prochaine étape d’une séquence → simple progression du scénario étapes qui s’enchaînent Dans un flot de contrôle à plat, l’objet n’attend pas que l’action précédente se termine. Messages :",
+    "source": "Chapitre 4 - Diagramme de séquence.pdf",
+    "page_number": 6
+  },
+  {
+    "chunk_id": "Chapitre 4 - Diagramme de séquence.pdf_p6_c1",
+    "text": "mine. Messages :",
+    "source": "Chapitre 4 - Diagramme de séquence.pdf",
+    "page_number": 6
+  },
+  {
+    "chunk_id": "Chapitre 4 - Diagramme de séquence.pdf_p7_c0",
+    "text": "3- Activations et envois de messages: Ici on a un appel de fonction dans une autre fonction. Un objet appelle un autre objet, puis il doit attendre que celui-ci termine. Messages : 2- Appel de procédure ou flot de contrôle emboîté : la séquence emboîtées doit se terminer pour que la séquence englobante reprenne le contrôle",
+    "source": "Chapitre 4 - Diagramme de séquence.pdf",
+    "page_number": 7
+  },
+  {
+    "chunk_id": "Chapitre 4 - Diagramme de séquence.pdf_p8_c0",
+    "text": "3- Activations et envois de messages: C’est le message de retour après l’exécution. Messages : 3- Retour d’un appel de procédure : le retour de message est explicite à la fin de l’exécution d’une sous-procédure et le retour éventuel de paramètres. Retour = fin de l’exécution + résultat",
+    "source": "Chapitre 4 - Diagramme de séquence.pdf",
+    "page_number": 8
+  },
+  {
+    "chunk_id": "Chapitre 4 - Diagramme de séquence.pdf_p9_c0",
+    "text": "Message synchrone et asynchrone: Message synchrone: Un message synchrone bloque l'expéditeur jusqu'à la réponse du destinataire. Le flot de contrôle passe de l'émetteur au récepteur : Si un objet A invoque une méthode d'un objet B, A reste bloqué tant que B n'a pas terminé. La représentation du message de retour est facultative, il est en fait inclus dans la fin d’exécution de l’opération déclenchée dans l’objet destinataire du message 3- Activations et envois de messages: Message asynchrone: Da",
+    "source": "Chapitre 4 - Diagramme de séquence.pdf",
+    "page_number": 9
+  },
+  {
+    "chunk_id": "Chapitre 4 - Diagramme de séquence.pdf_p9_c1",
+    "text": "ions et envois de messages: Message asynchrone: Dans ce cas, l’émetteur n’attend pas la réponse à son message, il poursuit l’éxecution de ses opérations. C’est la demi-flèche qui symbolise ce type de message. Cela décrit le comportement de l’appel (est-ce que l’objet attend ou non).",
+    "source": "Chapitre 4 - Diagramme de séquence.pdf",
+    "page_number": 9
+  },
+  {
+    "chunk_id": "Chapitre 4 - Diagramme de séquence.pdf_p10_c0",
+    "text": "Syntaxe des messages : La syntaxe des messages est : nomSignalOuOperation ( parametres ) La syntaxe des arguments est la suivante : nomParametre = valeurParametre Pour un argument modifiable : nomParametre : valeurParametre 3- Activations et envois de messages: Exemples : appeler(\"Capitaine Hadock\", 54214110) afficher(x,y) initialiser(x=100) f(x:12)",
+    "source": "Chapitre 4 - Diagramme de séquence.pdf",
+    "page_number": 10
+  },
+  {
+    "chunk_id": "Chapitre 4 - Diagramme de séquence.pdf_p11_c0",
+    "text": "Syntaxe des messages de retour : La syntaxe des messages de retour est : attributCible = nomOperation ( params ) : valeurRetour La syntaxe des paramètres est : nomParam = valeurParam Les messages de retour sont représentés en pointillés. 3- Activations et envois de messages: Utilisateur → Systeme : authentifier(login, mdp) resultat = authentifier() : true Panier → Article : getPrix() p = getPrix() : 10.5 Exemples :",
+    "source": "Chapitre 4 - Diagramme de séquence.pdf",
+    "page_number": 11
+  },
+  {
+    "chunk_id": "Chapitre 4 - Diagramme de séquence.pdf_p1_c0",
+    "text": "Chapitre IV: Représenté par : Mme Rhaiem Diagramme deséquence",
+    "source": "Chapitre 4 - Diagramme de séquence.pdf",
+    "page_number": 1
+  },
+  {
+    "chunk_id": "Chapitre 4 - Diagramme de séquence.pdf_p2_c0",
+    "text": "Description des cas d'utilisation 1- Introduction Les diagrammes de séquences permettent de décrire COMMENT les éléments du système interagissent entre eux et avec les acteurs. Les objets au cœur d'un système interagissent en s'échangeant des messages. Les acteurs interagissent avec le système au moyen d'IHM (Interfaces Homme-Machine). Les diagrammes de cas d'utilisation modélisent à QUOI sert le système, en organisant les interactions possibles avec les acteurs. Use Case = Qui ? + Fait quoi ? +",
+    "source": "Chapitre 4 - Diagramme de séquence.pdf",
+    "page_number": 2
+  },
+  {
+    "chunk_id": "Chapitre 4 - Diagramme de séquence.pdf_p2_c1",
+    "text": "avec les acteurs. Use Case = Qui ? + Fait quoi ? + Avec le système Les diagrammes de classes permettent de spécifier la structure et les liens entre les objets dont le système est composé Diagramme de classes = Classes + Attributs + Relations",
+    "source": "Chapitre 4 - Diagramme de séquence.pdf",
+    "page_number": 2
+  },
+  {
+    "chunk_id": "Chapitre 4 - Diagramme de séquence.pdf_p3_c0",
+    "text": "Formalisme : 2- Formalisme",
+    "source": "Chapitre 4 - Diagramme de séquence.pdf",
+    "page_number": 3
+  },
+  {
+    "chunk_id": "Chapitre 4 - Diagramme de séquence.pdf_p4_c0",
+    "text": "Sémantique : 3- Sémantique",
+    "source": "Chapitre 4 - Diagramme de séquence.pdf",
+    "page_number": 4
+  },
+  {
+    "chunk_id": "Chapitre 4 - Diagramme de séquence.pdf_p5_c0",
+    "text": "Exemple: 3- Sémantique",
+    "source": "Chapitre 4 - Diagramme de séquence.pdf",
+    "page_number": 5
+  },
+  {
+    "chunk_id": "Chapitre 4 - Diagramme de séquence.pdf_p6_c0",
+    "text": "Activations : 3- Activations et envois de messages: Une période d’activité correspond au temps pendant lequel un objet effectue une action. On distingue trois grandes catégories d’envois de message : 1- Flot de contrôle à plat : est utilisé pour indiquer la progression vers la prochaine étape d’une séquence → simple progression du scénario étapes qui s’enchaînent Dans un flot de contrôle à plat, l’objet n’attend pas que l’action précédente se termine. Messages :",
+    "source": "Chapitre 4 - Diagramme de séquence.pdf",
+    "page_number": 6
+  },
+  {
+    "chunk_id": "Chapitre 4 - Diagramme de séquence.pdf_p6_c1",
+    "text": "mine. Messages :",
+    "source": "Chapitre 4 - Diagramme de séquence.pdf",
+    "page_number": 6
+  },
+  {
+    "chunk_id": "Chapitre 4 - Diagramme de séquence.pdf_p7_c0",
+    "text": "3- Activations et envois de messages: Ici on a un appel de fonction dans une autre fonction. Un objet appelle un autre objet, puis il doit attendre que celui-ci termine. Messages : 2- Appel de procédure ou flot de contrôle emboîté : la séquence emboîtées doit se terminer pour que la séquence englobante reprenne le contrôle",
+    "source": "Chapitre 4 - Diagramme de séquence.pdf",
+    "page_number": 7
+  },
+  {
+    "chunk_id": "Chapitre 4 - Diagramme de séquence.pdf_p8_c0",
+    "text": "3- Activations et envois de messages: C’est le message de retour après l’exécution. Messages : 3- Retour d’un appel de procédure : le retour de message est explicite à la fin de l’exécution d’une sous-procédure et le retour éventuel de paramètres. Retour = fin de l’exécution + résultat",
+    "source": "Chapitre 4 - Diagramme de séquence.pdf",
+    "page_number": 8
+  },
+  {
+    "chunk_id": "Chapitre 4 - Diagramme de séquence.pdf_p9_c0",
+    "text": "Message synchrone et asynchrone: Message synchrone: Un message synchrone bloque l'expéditeur jusqu'à la réponse du destinataire. Le flot de contrôle passe de l'émetteur au récepteur : Si un objet A invoque une méthode d'un objet B, A reste bloqué tant que B n'a pas terminé. La représentation du message de retour est facultative, il est en fait inclus dans la fin d’exécution de l’opération déclenchée dans l’objet destinataire du message 3- Activations et envois de messages: Message asynchrone: Da",
+    "source": "Chapitre 4 - Diagramme de séquence.pdf",
+    "page_number": 9
+  },
+  {
+    "chunk_id": "Chapitre 4 - Diagramme de séquence.pdf_p9_c1",
+    "text": "ions et envois de messages: Message asynchrone: Dans ce cas, l’émetteur n’attend pas la réponse à son message, il poursuit l’éxecution de ses opérations. C’est la demi-flèche qui symbolise ce type de message. Cela décrit le comportement de l’appel (est-ce que l’objet attend ou non).",
+    "source": "Chapitre 4 - Diagramme de séquence.pdf",
+    "page_number": 9
+  },
+  {
+    "chunk_id": "Chapitre 4 - Diagramme de séquence.pdf_p10_c0",
+    "text": "Syntaxe des messages : La syntaxe des messages est : nomSignalOuOperation ( parametres ) La syntaxe des arguments est la suivante : nomParametre = valeurParametre Pour un argument modifiable : nomParametre : valeurParametre 3- Activations et envois de messages: Exemples : appeler(\"Capitaine Hadock\", 54214110) afficher(x,y) initialiser(x=100) f(x:12)",
+    "source": "Chapitre 4 - Diagramme de séquence.pdf",
+    "page_number": 10
+  },
+  {
+    "chunk_id": "Chapitre 4 - Diagramme de séquence.pdf_p11_c0",
+    "text": "Syntaxe des messages de retour : La syntaxe des messages de retour est : attributCible = nomOperation ( params ) : valeurRetour La syntaxe des paramètres est : nomParam = valeurParam Les messages de retour sont représentés en pointillés. 3- Activations et envois de messages: Utilisateur → Systeme : authentifier(login, mdp) resultat = authentifier() : true Panier → Article : getPrix() p = getPrix() : 10.5 Exemples :",
+    "source": "Chapitre 4 - Diagramme de séquence.pdf",
+    "page_number": 11
+  },
+  {
+    "chunk_id": "Chapitre 4 - Diagramme de séquence.pdf_p1_c0",
+    "text": "Chapitre IV: Représenté par : Mme Rhaiem Diagramme deséquence",
+    "source": "Chapitre 4 - Diagramme de séquence.pdf",
+    "page_number": 1
+  },
+  {
+    "chunk_id": "Chapitre 4 - Diagramme de séquence.pdf_p2_c0",
+    "text": "Description des cas d'utilisation 1- Introduction Les diagrammes de séquences permettent de décrire COMMENT les éléments du système interagissent entre eux et avec les acteurs. Les objets au cœur d'un système interagissent en s'échangeant des messages. Les acteurs interagissent avec le système au moyen d'IHM (Interfaces Homme-Machine). Les diagrammes de cas d'utilisation modélisent à QUOI sert le système, en organisant les interactions possibles avec les acteurs. Use Case = Qui ? + Fait quoi ? +",
+    "source": "Chapitre 4 - Diagramme de séquence.pdf",
+    "page_number": 2
+  },
+  {
+    "chunk_id": "Chapitre 4 - Diagramme de séquence.pdf_p2_c1",
+    "text": "avec les acteurs. Use Case = Qui ? + Fait quoi ? + Avec le système Les diagrammes de classes permettent de spécifier la structure et les liens entre les objets dont le système est composé Diagramme de classes = Classes + Attributs + Relations",
+    "source": "Chapitre 4 - Diagramme de séquence.pdf",
+    "page_number": 2
+  },
+  {
+    "chunk_id": "Chapitre 4 - Diagramme de séquence.pdf_p3_c0",
+    "text": "Formalisme : 2- Formalisme",
+    "source": "Chapitre 4 - Diagramme de séquence.pdf",
+    "page_number": 3
+  },
+  {
+    "chunk_id": "Chapitre 4 - Diagramme de séquence.pdf_p4_c0",
+    "text": "Sémantique : 3- Sémantique",
+    "source": "Chapitre 4 - Diagramme de séquence.pdf",
+    "page_number": 4
+  },
+  {
+    "chunk_id": "Chapitre 4 - Diagramme de séquence.pdf_p5_c0",
+    "text": "Exemple: 3- Sémantique",
+    "source": "Chapitre 4 - Diagramme de séquence.pdf",
+    "page_number": 5
+  },
+  {
+    "chunk_id": "Chapitre 4 - Diagramme de séquence.pdf_p6_c0",
+    "text": "Activations : 3- Activations et envois de messages: Une période d’activité correspond au temps pendant lequel un objet effectue une action. On distingue trois grandes catégories d’envois de message : 1- Flot de contrôle à plat : est utilisé pour indiquer la progression vers la prochaine étape d’une séquence → simple progression du scénario étapes qui s’enchaînent Dans un flot de contrôle à plat, l’objet n’attend pas que l’action précédente se termine. Messages :",
+    "source": "Chapitre 4 - Diagramme de séquence.pdf",
+    "page_number": 6
+  },
+  {
+    "chunk_id": "Chapitre 4 - Diagramme de séquence.pdf_p6_c1",
+    "text": "mine. Messages :",
+    "source": "Chapitre 4 - Diagramme de séquence.pdf",
+    "page_number": 6
+  },
+  {
+    "chunk_id": "Chapitre 4 - Diagramme de séquence.pdf_p7_c0",
+    "text": "3- Activations et envois de messages: Ici on a un appel de fonction dans une autre fonction. Un objet appelle un autre objet, puis il doit attendre que celui-ci termine. Messages : 2- Appel de procédure ou flot de contrôle emboîté : la séquence emboîtées doit se terminer pour que la séquence englobante reprenne le contrôle",
+    "source": "Chapitre 4 - Diagramme de séquence.pdf",
+    "page_number": 7
+  },
+  {
+    "chunk_id": "Chapitre 4 - Diagramme de séquence.pdf_p8_c0",
+    "text": "3- Activations et envois de messages: C’est le message de retour après l’exécution. Messages : 3- Retour d’un appel de procédure : le retour de message est explicite à la fin de l’exécution d’une sous-procédure et le retour éventuel de paramètres. Retour = fin de l’exécution + résultat",
+    "source": "Chapitre 4 - Diagramme de séquence.pdf",
+    "page_number": 8
+  },
+  {
+    "chunk_id": "Chapitre 4 - Diagramme de séquence.pdf_p9_c0",
+    "text": "Message synchrone et asynchrone: Message synchrone: Un message synchrone bloque l'expéditeur jusqu'à la réponse du destinataire. Le flot de contrôle passe de l'émetteur au récepteur : Si un objet A invoque une méthode d'un objet B, A reste bloqué tant que B n'a pas terminé. La représentation du message de retour est facultative, il est en fait inclus dans la fin d’exécution de l’opération déclenchée dans l’objet destinataire du message 3- Activations et envois de messages: Message asynchrone: Da",
+    "source": "Chapitre 4 - Diagramme de séquence.pdf",
+    "page_number": 9
+  },
+  {
+    "chunk_id": "Chapitre 4 - Diagramme de séquence.pdf_p9_c1",
+    "text": "ions et envois de messages: Message asynchrone: Dans ce cas, l’émetteur n’attend pas la réponse à son message, il poursuit l’éxecution de ses opérations. C’est la demi-flèche qui symbolise ce type de message. Cela décrit le comportement de l’appel (est-ce que l’objet attend ou non).",
+    "source": "Chapitre 4 - Diagramme de séquence.pdf",
+    "page_number": 9
+  },
+  {
+    "chunk_id": "Chapitre 4 - Diagramme de séquence.pdf_p10_c0",
+    "text": "Syntaxe des messages : La syntaxe des messages est : nomSignalOuOperation ( parametres ) La syntaxe des arguments est la suivante : nomParametre = valeurParametre Pour un argument modifiable : nomParametre : valeurParametre 3- Activations et envois de messages: Exemples : appeler(\"Capitaine Hadock\", 54214110) afficher(x,y) initialiser(x=100) f(x:12)",
+    "source": "Chapitre 4 - Diagramme de séquence.pdf",
+    "page_number": 10
+  },
+  {
+    "chunk_id": "Chapitre 4 - Diagramme de séquence.pdf_p11_c0",
+    "text": "Syntaxe des messages de retour : La syntaxe des messages de retour est : attributCible = nomOperation ( params ) : valeurRetour La syntaxe des paramètres est : nomParam = valeurParam Les messages de retour sont représentés en pointillés. 3- Activations et envois de messages: Utilisateur → Systeme : authentifier(login, mdp) resultat = authentifier() : true Panier → Article : getPrix() p = getPrix() : 10.5 Exemples :",
+    "source": "Chapitre 4 - Diagramme de séquence.pdf",
+    "page_number": 11
+  }
+]
