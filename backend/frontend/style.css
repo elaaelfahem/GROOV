@@ -43,17 +43,18 @@
 
 /* ── Light Mode Tokens ────────────────────────────────────── */
 body.light-mode {
-    --bg-void:   #f0f2f5;
-    --bg-room:   #e4e9f2;
-    --bg-card:   rgba(255, 255, 255, 0.65);
-    --bg-sidebar:rgba(255, 255, 255, 0.92);
-    --text-1:    #1a1a24;
-    --text-2:    #4a4a60;
-    --text-3:    #7b7b95;
-    --border:    rgba(0, 0, 0, 0.08);
-    --border-2:  rgba(0, 0, 0, 0.15);
-    --glass:     rgba(0, 0, 0, 0.03);
-    --glass-2:   rgba(0, 0, 0, 0.06);
+    --bg-void:   #f8fafc;
+    --bg-room:   #f1f5f9;
+    --bg-card:   rgba(255, 255, 255, 0.85);
+    --bg-sidebar:rgba(255, 255, 255, 0.95);
+    --text-1:    #0f172a;
+    --text-2:    #475569;
+    --text-3:    #94a3b8;
+    --border:    rgba(0, 0, 0, 0.05);
+    --border-2:  rgba(0, 0, 0, 0.1);
+    --glass:     rgba(255, 255, 255, 0.4);
+    --glass-2:   rgba(255, 255, 255, 0.6);
+    --floor-grid:rgba(91, 141, 239, 0.08);
 }
 
 body.light-mode .header { background: rgba(255, 255, 255, 0.8); }
@@ -206,7 +207,6 @@ html, body {
         radial-gradient(ellipse 80% 60% at 80% 80%, rgba(168,85,247,0.03) 0%, transparent 50%),
         var(--bg-room);
     overflow: hidden;
-    perspective: 1200px;
 }
 
 /* ── Room Atmosphere ──────────────────────────────────────── */
@@ -263,7 +263,7 @@ html, body {
         linear-gradient(rgba(91,141,239,0.025) 1px, transparent 1px),
         linear-gradient(90deg, rgba(91,141,239,0.025) 1px, transparent 1px);
     background-size: 70px 70px;
-    transform: perspective(500px) rotateX(55deg);
+    transform: rotateX(65deg);
     transform-origin: bottom center;
     mask-image: radial-gradient(ellipse 70% 60% at 50% 100%, rgba(0,0,0,0.5) 10%, transparent 70%);
 }

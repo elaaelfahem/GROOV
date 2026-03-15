@@ -21,12 +21,12 @@ const PRESENTING_POS = { x: 45, y: 16 };
 const CENTER_POS     = { x: 45, y: 48 };
 
 const PERSONA_CONFIG = {
-    genius:      { name: "Julian (Genius)",    emoji: "🧠", color: "#4a9eff", voice: "calm",     idleSpeed: 3.2 },
-    confused:    { name: "Chloe (Confused)",   emoji: "🤔", color: "#ff9f43", voice: "nervous",  idleSpeed: 2.4 },
-    skeptic:     { name: "Marcus (Skeptic)",   emoji: "🔍", color: "#ff4757", voice: "sharp",    idleSpeed: 3.8 },
-    summarizer:  { name: "Sarah (Summarizer)", emoji: "📝", color: "#2ed573", voice: "steady",   idleSpeed: 3.5 },
-    quiz_master: { name: "Leo (Quiz Master)",  emoji: "🎯", color: "#a855f7", voice: "energetic",idleSpeed: 2.6 },
-    organizer:   { name: "Maya (Organizer)",   emoji: "📋", color: "#06b6d4", voice: "composed", idleSpeed: 3.0 },
+    genius:      { name: "Julian",    emoji: "🧠", color: "#4a9eff", voice: "calm",     idleSpeed: 3.2 },
+    confused:    { name: "Chloe",   emoji: "🤔", color: "#ff9f43", voice: "nervous",  idleSpeed: 2.4 },
+    skeptic:     { name: "Marcus",   emoji: "🔍", color: "#ff4757", voice: "sharp",    idleSpeed: 3.8 },
+    summarizer:  { name: "Sarah", emoji: "📝", color: "#2ed573", voice: "steady",   idleSpeed: 3.5 },
+    quiz_master: { name: "Leo",  emoji: "🎯", color: "#a855f7", voice: "energetic",idleSpeed: 2.6 },
+    organizer:   { name: "Maya",   emoji: "📋", color: "#06b6d4", voice: "composed", idleSpeed: 3.0 },
 };
 
 const REACTIONS = [
@@ -521,6 +521,8 @@ function initAmbientParticles() {
 }
 
 function initEvents() {
+
+
     el.sendBtn.addEventListener('click', sendMessage);
     el.userInput.addEventListener('keypress', (e) => {
         if (e.key === 'Enter') sendMessage();
